@@ -1,24 +1,17 @@
-<!DOCTYPE html>
+{% extends 'student/base.html' %}
 {% load static %}
 
-<html>
+{% block title %}
+	Home
+{% endblock %}
 
-	<head>
-		<title>Rango</title>
-	</head>
-
-	<body>
-		<h1>Rango says...</h1>
-		<div>
-			hey there partner! <br />
-			<strong>{{ boldmessage }}</strong><br />
-		</div>
-		<div>
-			<a href="/student/about/">About</a><br />
-			<a href="{% url 'add_major' %}">Add a New Major</a><br />
-			<a href="{% url 'majors_list' %}">List Majors</a><br />
-			<img src="{% static "images/rango.jpg" %}" alt="Picture of Rango" />
-		</div>
-	</body>
-
-</html>
+{% block body_block %}
+	<div class="jumbotron">
+		<h1 class="display-3">Rango says...</h1>
+		{% if user.is_authenticated %}
+			<h1>hey there {{ user.username }}!</h1>
+		{% else %}
+			<h1>hey there partner! </h1>
+		{% endif %}
+	</div>	
+{% endblock %}

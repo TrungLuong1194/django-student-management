@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+{% load static %}
+
+<html lang="en">
+	<head>
+		<meta name="viewport" content="width=device-width, initial-scale=1">
+	    <meta charset="UTF-8">
+	    <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.6.9/angular.min.js"></script>
+	    <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.6.9/angular-route.js"></script>
+	    <meta name="viewport" content="width=device-width, initial-scale=1">
+	    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css">
+	    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+	    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
+	    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js"></script>
+
+		<link rel="icon" href="{% static 'images/bmstu.png' %}">
+		<title>
+			{% block title %}BMSTU{% endblock %}
+		</title>
+	</head>
+
+	<body>
+		<nav class="navbar navbar-expand navbar-dark flex-column flex-md-row bd-navbar" style="background-color: #563d7c;">
+			<div class="collapse navbar-collapse" id="navbar">
+				<ul class="navbar-nav mr-auto">
+					<li class="nav-item active">
+						<a class="nav-link" href="{% url 'index' %}">Home</a>
+					</li>
+					{% if user.is_authenticated %}
+		            <li class="nav-item">
+		              <a class="nav-link" href="{% url 'majors_list' %}">Major</a>
+		            </li>
+					<li class="nav-item">
+						<a class="nav-link" href="{% url 'auth_logout' %}?next=/student/">Logout</a>
+					</li>
+					{% else %}
+					<li class="nav-item">
+						<a class="nav-link" href="{% url 'registration_register' %}">Sign Up</a>
+					</li>
+					<li class="nav-item">
+						<a class="nav-link" href="{% url 'auth_login' %}">Login</a>
+					</li>
+					{% endif %}
+				</ul>
+			</div>
+		</nav>
+
+		<div class="container">
+			{% block body_block %}{% endblock %}
+		</div>
+	</body>
+</html>

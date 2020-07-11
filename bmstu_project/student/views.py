@@ -2,6 +2,7 @@ from django.shortcuts import render
 from django.http import HttpResponse
 from student.models import Major
 from student.forms import MajorForm
+from django.contrib.auth.decorators import login_required
 
 
 def index(request):
@@ -9,6 +10,7 @@ def index(request):
 
 	return render(request, 'student/index.html', context=context_dict)
 
+@login_required
 def majors_list(request):
 	majors_list = Major.objects.all()
 
@@ -18,6 +20,7 @@ def majors_list(request):
 		{'majors_list' : majors_list}
 	)
 
+@login_required
 def add_major(request):
     form = MajorForm()
 
