@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+{% load static %}
+
+<html>
+
+	<head>
+		<title>Rango</title>
+	</head>
+
+	<body>
+		<h1>Rango says...</h1>
+		<div>
+			hey there partner! <br />
+			<strong>{{ boldmessage }}</strong><br />
+		</div>
+		<div>
+			<a href="/student/about/">About</a><br />
+			<a href="{% url 'add_major' %}">Add a New Major</a><br />
+			<a href="{% url 'majors_list' %}">List Majors</a><br />
+			<img src="{% static "images/rango.jpg" %}" alt="Picture of Rango" />
+		</div>
+	</body>
+
+</html>

@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+{% load static %}
+
+<html>
+
+	<head>
+		<title>Majors List</title>
+	</head>
+
+	<body>
+		<div class="panel">
+			{% if majors_list %}
+			<div class="panel-heading">
+				<!-- Display search results in an ordered list -->
+				<div class="panel-body">
+					<div class="list-group">
+						{% for major in majors_list %}
+						<div class="list-group-item">
+							<h4 class="list-group-item-heading">
+								<a>
+									{{ major.code }} ({{ major.viName }})
+								</a>
+							</h4>
+						</div>
+						{% endfor %}
+					</div>
+				</div>
+			</div>
+			{% else %}
+				<p>There are no majors for the site.</p>
+			{% endif %}
+</div>
+	</body>
+
+</html>
