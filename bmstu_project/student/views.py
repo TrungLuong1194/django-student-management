@@ -5,6 +5,7 @@ from student.forms import MajorForm, UserProfileForm
 from django.contrib.auth.decorators import login_required
 from registration.backends.simple.views import RegistrationView
 from django.urls import reverse
+from django.contrib.auth.models import User
 
 
 def index(request):
@@ -61,3 +62,34 @@ def register_profile(request):
 class StudentRegistrationView(RegistrationView):
     def get_success_url(self, user):
         return reverse('register_profile')
+
+@login_required
+def profile(request, username):
+    try:
+        user = User.objects.get(username=username)
+    except User.DoesNotExist:
+        return redirect('index')
+    
+    userprofile = UserProfile.objects.get_or_create(user=user)[0]
+    form = UserProfileForm({
+            # 'major': userprofile.major,
+            'fullName': userprofile.fullName,
+            'gender': userprofile.gender,
+            # 'birthday': userprofile.birthday,
+            'ethnic': userprofile.ethnic,
+            'religion': userprofile.religion,
+            # 'studyYear': userprofile.studyYear,
+            'addressVN': userprofile.addressVN,
+            'addressRu': userprofile.addressRu,
+            # 'phone': userprofile.phone,
+        })
+    
+    if request.method == 'POST':
+        form = UserProfileForm(request.POST, instance=userprofile)
+        if form.is_valid():
+            form.save(commit=True)
+            return redirect('profile', user.username)
+        else:
+            print(form.errors)
+    
+    return render(request, 'student/profile.html', {'userprofile': userprofile, 'selecteduser': user, 'form': form})
