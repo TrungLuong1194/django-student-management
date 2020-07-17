@@ -24,6 +24,6 @@ urlpatterns = [
     url(r'^$', views.index, name='index'),
     url(r'^student/', include('student.urls')),
     url(r'^admin/', admin.site.urls),
+    url(r'^accounts/register/$', views.StudentRegistrationView.as_view(), name='registration_register'),
     url(r'^accounts/', include('registration.backends.simple.urls')),
-    # url(r'^accounts/register/$', views.StudentRegistrationView.as_view(), name='registration_register'),
 ] + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
