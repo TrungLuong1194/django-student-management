@@ -16,7 +16,7 @@
 		<div class="form-group row">
             <label class="col-form-label col-sm-2 font-weight-bold">Full Name</label>
             <div class="col-sm-10">
-                <input type="text" class="form-control" id="id_fullName" name="fullName" required/>
+                <input type="text" class="form-control" id="id_fullName" name="fullName"/>
             </div>
         </div>
 		
@@ -25,7 +25,7 @@
             <div class="col-sm-2">
 	            <select id="id_major" name="major" class="form-control">
 	            	{% for choice in form.major.field.queryset %}
-	            		<option value={{choice.pk}}>{{choice}}</option>
+	            		<option value={{ choice.pk }}>{{ choice }}</option>
 					{% endfor %}
 				</select>
 			</div>
@@ -33,59 +33,61 @@
 			<label class="col-form-label col-sm-2 font-weight-bold">Gender</label>
             <div class="col-sm-2">
                 <select id="id_gender" name="gender" class="form-control">
-	            	{% for value, name in form.gender.field.choices %}
-	            		<option value={{value}}>{{name}}</option>
+	            	{% for x, y in form.gender.field.choices %}
+	            		<option value={{ x }}>{{ y }}</option>
 					{% endfor %}
 				</select>
             </div>
 
             <label class="col-form-label col-sm-2 font-weight-bold">Study Year</label>
             <div class="col-sm-2">
-                <input type="number" class="form-control" id="id_studyYear" name="studyYear" required/>
+                <input type="number" class="form-control" id="id_studyYear" name="studyYear"/>
             </div>
         </div>
 
         <div class="form-group row">
             <label class="col-form-label col-sm-2 font-weight-bold">Birthday</label>
             <div class="col-sm-4">
-                <input type="date" class="form-control" id="id_birthday" name="birthday" required/>
+                <input type="date" class="form-control" id="id_birthday" name="birthday"/>
             </div>
 
             <label class="col-form-label col-sm-2 font-weight-bold">Phone</label>
             <div class="col-sm-4">
-                <input type="phone" class="form-control" id="id_phone" name="phone" required/>
+                <input type="phone" class="form-control" id="id_phone" name="phone"/>
             </div>
         </div>
 
         <div class="form-group row">
             <label class="col-form-label col-sm-2 font-weight-bold">Ethnic</label>
             <div class="col-sm-10">
-                <input type="text" class="form-control" id="id_ethnic" name="ethnic" placeholder="Dan toc: Kinh..." required/>
+                <input type="text" class="form-control" id="id_ethnic" name="ethnic" placeholder="Dan toc: Kinh..."/>
             </div>
         </div>
 
         <div class="form-group row">
             <label class="col-form-label col-sm-2 font-weight-bold">Religion</label>
             <div class="col-sm-10">
-                <input type="text" class="form-control" id="id_religion" name="religion" placeholder="Ton giao: Khong..." required/>
+                <input type="text" class="form-control" id="id_religion" name="religion" placeholder="Ton giao: Khong..."/>
             </div>
         </div>
 
         <div class="form-group row">
             <label class="col-form-label col-sm-2 font-weight-bold">Address in VN</label>
             <div class="col-sm-10">
-                <input type="text" class="form-control" id="id_addressVN" name="addressVN" required/>
+                <input type="text" class="form-control" id="id_addressVN" name="addressVN"/>
             </div>
         </div>
 
         <div class="form-group row">
             <label class="col-form-label col-sm-2 font-weight-bold">Address in Russia</label>
             <div class="col-sm-10">
-                <input type="text" class="form-control" id="id_addressRu" name="addressRu" required/>
+                <input type="text" class="form-control" id="id_addressRu" name="addressRu"/>
             </div>
         </div>
 
-		<div class="text-right">
+        <hr/>
+
+		<div class="text-left">
             <input class="btn btn-primary btn-sm" type="submit" name="submit" value="Save" />
         </div>
 	</form>

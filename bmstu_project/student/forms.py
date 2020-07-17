@@ -4,9 +4,9 @@ from django.contrib.auth.models import User
 
 
 class MajorForm(forms.ModelForm):
-	code = forms.CharField(max_length=20, help_text="Please enter the major code.")
-	viName = forms.CharField(max_length=128, help_text="Please enter the major vietnamese name.")
-	enName = forms.CharField(max_length=128, help_text="Please enter the major english name.")
+	code = forms.CharField(max_length=20)
+	viName = forms.CharField(max_length=128)
+	enName = forms.CharField(max_length=128)
 
 
 	class Meta:

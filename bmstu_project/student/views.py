@@ -72,16 +72,16 @@ def profile(request, username):
     
     userprofile = UserProfile.objects.get_or_create(user=user)[0]
     form = UserProfileForm({
-            # 'major': userprofile.major,
+            'major': userprofile.major,
             'fullName': userprofile.fullName,
             'gender': userprofile.gender,
-            # 'birthday': userprofile.birthday,
+            'birthday': userprofile.birthday,
             'ethnic': userprofile.ethnic,
             'religion': userprofile.religion,
-            # 'studyYear': userprofile.studyYear,
+            'studyYear': userprofile.studyYear,
             'addressVN': userprofile.addressVN,
             'addressRu': userprofile.addressRu,
-            # 'phone': userprofile.phone,
+            'phone': userprofile.phone,
         })
     
     if request.method == 'POST':
@@ -92,4 +92,12 @@ def profile(request, username):
         else:
             print(form.errors)
     
-    return render(request, 'student/profile.html', {'userprofile': userprofile, 'selecteduser': user, 'form': form})
+    return render(request, 'student/profile.html', 
+            {'userprofile': userprofile, 'selecteduser': user, 'form': form})
+
+@login_required
+def profiles_list(request):
+    userprofile_list = UserProfile.objects.all()
+
+    return render(request, 'student/profiles_list.html',
+            {'userprofile_list' : userprofile_list})

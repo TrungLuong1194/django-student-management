@@ -24,16 +24,16 @@ class Major(models.Model):
 
 class UserProfile(models.Model):
 	user = models.OneToOneField(User, primary_key=True, on_delete=models.CASCADE)
-	major = models.ForeignKey(Major, on_delete=models.CASCADE, blank=True)
-	fullName = models.CharField(max_length=128, blank=False)
-	gender = models.CharField(max_length=20, blank=False)
-	birthday = models.DateField(blank=False)
-	ethnic = models.CharField(max_length=20, blank=False)  # Dan toc
-	religion = models.CharField(max_length=20, blank=False)  # Ton giao
-	studyYear = models.IntegerField(blank=False)
-	addressVN = models.CharField(max_length=128, blank=False)
-	addressRu = models.CharField(max_length=128, blank=False)
-	phone = models.IntegerField(blank=False)
+	major = models.ForeignKey(Major, on_delete=models.CASCADE, null=True)
+	fullName = models.CharField(max_length=128, null=True)
+	gender = models.CharField(max_length=20, null=True)
+	birthday = models.DateField(null=True)
+	ethnic = models.CharField(max_length=20, null=True)  # Dan toc
+	religion = models.CharField(max_length=20, null=True)  # Ton giao
+	studyYear = models.IntegerField(null=True)
+	addressVN = models.CharField(max_length=128, null=True)
+	addressRu = models.CharField(max_length=128, null=True)
+	phone = models.IntegerField(unique=True, null=True)
 
 
 	def __str__(self):
