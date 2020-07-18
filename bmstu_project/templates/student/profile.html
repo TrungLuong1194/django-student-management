@@ -15,6 +15,21 @@
 			<form method="post" action="." enctype="multipart/form-data">
 				{% csrf_token %}
 
+				{% if form.errors %}
+		            {% for field in form %}
+		                {% for error in field.errors %}
+		                    <div class="alert alert-danger">
+		                        <strong>{{ error|escape }}</strong>
+		                    </div>
+		                {% endfor %}
+		            {% endfor %}
+		            {% for error in form.non_field_errors %}
+		                <div class="alert alert-danger">
+		                    <strong>{{ error|escape }}</strong>
+		                </div>
+		            {% endfor %}
+		        {% endif %}
+
 				<div class="form-group row">
 		            <label class="col-form-label col-sm-2 font-weight-bold">Full Name</label>
 		            <div class="col-sm-10">
