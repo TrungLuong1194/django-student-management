@@ -18,7 +18,7 @@
 				<div class="form-group row">
 		            <label class="col-form-label col-sm-2 font-weight-bold">Full Name</label>
 		            <div class="col-sm-10">
-		                <input type="text" class="form-control" id="id_fullName" name="fullName" value="{{ userprofile.fullName }}" />
+		                <input type="text" class="form-control" id="id_fullName" name="fullName" value="{{ userprofile.fullName }}" required />
 		            </div>
 		        </div>
 				
@@ -43,47 +43,47 @@
 
 		            <label class="col-form-label col-sm-2 font-weight-bold">Study Year</label>
 		            <div class="col-sm-2">
-		                <input type="number" class="form-control" id="id_studyYear" name="studyYear" value="{{ userprofile.studyYear }}" />
+		                <input type="number" class="form-control" id="id_studyYear" name="studyYear" value="{{ userprofile.studyYear }}" required />
 		            </div>
 		        </div>
 
 		        <div class="form-group row">
 		            <label class="col-form-label col-sm-2 font-weight-bold">Birthday</label>
 		            <div class="col-sm-4">
-		                <input type="date" class="form-control" id="id_birthday" name="birthday" value="{{ userprofile.birthday|date:'Y-m-d' }}"/>
+		                <input type="date" class="form-control" id="id_birthday" name="birthday" value="{{ userprofile.birthday|date:'Y-m-d' }}" required />
 		            </div>
 
 		            <label class="col-form-label col-sm-2 font-weight-bold">Phone</label>
 		            <div class="col-sm-4">
-		                <input type="phone" class="form-control" id="id_phone" name="phone" value="{{ userprofile.phone }}" />
+		                <input type="phone" class="form-control" id="id_phone" name="phone" value="{{ userprofile.phone }}" required />
 		            </div>
 		        </div>
 
 		        <div class="form-group row">
 		            <label class="col-form-label col-sm-2 font-weight-bold">Ethnic</label>
 		            <div class="col-sm-10">
-		                <input type="text" class="form-control" id="id_ethnic" name="ethnic" value="{{ userprofile.ethnic }}"/>
+		                <input type="text" class="form-control" id="id_ethnic" name="ethnic" value="{{ userprofile.ethnic }}" required />
 		            </div>
 		        </div>
 
 		        <div class="form-group row">
 		            <label class="col-form-label col-sm-2 font-weight-bold">Religion</label>
 		            <div class="col-sm-10">
-		                <input type="text" class="form-control" id="id_religion" name="religion" value="{{ userprofile.religion }}"/>
+		                <input type="text" class="form-control" id="id_religion" name="religion" value="{{ userprofile.religion }}" required />
 		            </div>
 		        </div>
 
 		        <div class="form-group row">
 		            <label class="col-form-label col-sm-2 font-weight-bold">Address in VN</label>
 		            <div class="col-sm-10">
-		                <input type="text" class="form-control" id="id_addressVN" name="addressVN" value="{{ userprofile.addressVN }}"/>
+		                <input type="text" class="form-control" id="id_addressVN" name="addressVN" value="{{ userprofile.addressVN }}" required />
 		            </div>
 		        </div>
 
 		        <div class="form-group row">
 		            <label class="col-form-label col-sm-2 font-weight-bold">Address in Russia</label>
 		            <div class="col-sm-10">
-		                <input type="text" class="form-control" id="id_addressRu" name="addressRu" value="{{ userprofile.addressRu }}"/>
+		                <input type="text" class="form-control" id="id_addressRu" name="addressRu" value="{{ userprofile.addressRu }}" required />
 		            </div>
 		        </div>
 

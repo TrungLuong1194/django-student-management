@@ -17,11 +17,8 @@ def index(request):
 def majors_list(request):
 	majors_list = Major.objects.all()
 
-	return render(
-		request, 
-		'student/majors_list.html',
-		{'majors_list' : majors_list}
-	)
+	return render(request, 'student/majors_list.html',
+		{'majors_list' : majors_list})
 
 @login_required
 def add_major(request):
