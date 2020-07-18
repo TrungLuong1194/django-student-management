@@ -1,0 +1,58 @@
+{% extends 'student/base.html' %}
+{% load static %}
+
+{% block title %}
+    Add Major
+{% endblock %}
+
+{% block body_block %}
+    <hr/>
+    <h3 class="font-weight-normal">Add a Major</h3>
+    <hr/>
+
+    <form id="major_form" method="post" action="{% url 'add_major' %}">  
+        {% csrf_token %}
+
+        {% if form.errors %}
+            {% for field in form %}
+                {% for error in field.errors %}
+                    <div class="alert alert-danger">
+                        <strong>{{ error|escape }}</strong>
+                    </div>
+                {% endfor %}
+            {% endfor %}
+            {% for error in form.non_field_errors %}
+                <div class="alert alert-danger">
+                    <strong>{{ error|escape }}</strong>
+                </div>
+            {% endfor %}
+        {% endif %}
+
+        <div class="form-group row">
+            <label class="col-form-label col-sm-2 font-weight-bold">Code</label>
+            <div class="col-sm-10">
+                <input type="text" class="form-control" id="id_code" name="code" placeholder="IU7..." required/>
+            </div>
+        </div>
+
+        <div class="form-group row">
+            <label class="col-form-label col-sm-2 font-weight-bold">Vietnamese Name</label>
+            <div class="col-sm-10">
+                <input type="text" class="form-control" id="id_viName" name="viName" placeholder="Kỹ thuật phần mềm..." required/>
+            </div>
+        </div>
+
+        <div class="form-group row">
+            <label class="col-form-label col-sm-2 font-weight-bold">English Name</label>
+            <div class="col-sm-10">
+                <input type="text" class="form-control" id="id_enName" name="enName" placeholder="Software Engineering..."required/>
+            </div>
+        </div>
+
+        <hr/>
+
+        <div class="text-left">
+            <input class="btn btn-primary btn-sm" type="submit" name="submit" value="Save" />
+        </div>
+    </form>
+{% endblock %}

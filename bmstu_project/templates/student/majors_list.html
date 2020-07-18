@@ -1,0 +1,39 @@
+{% extends 'student/base.html' %}
+{% load static %}
+
+{% block title %}
+	Major
+{% endblock %}
+
+{% block body_block %}
+	<hr/>
+    <h3 class="font-weight-normal">Majors List</h3>
+    <hr/>
+
+	{% if majors_list %}
+		<table class="table table-striped table-hover table-borderless">
+	        <thead>
+	        <tr>
+	            <th scope="col">Code</th>
+	            <th scope="col">Name</th>
+	        </tr>
+	        </thead>
+	        <tbody>
+	        {% for major in majors_list %}
+	        <tr>
+	            <td>{{major.code}}</td>
+	            <td>{{major.enName}}</td>
+	        </tr>
+	        {% endfor %}
+	        </tbody>
+	    </table>
+    {% else %}
+		<p>There are no majors.</p>
+	{% endif %}
+
+    <hr/>
+
+	<div class="text-left">
+		<a class="btn btn-primary btn-sm" href="{% url 'add_major' %}">Add a Major</a>
+	</div>
+{% endblock %}
