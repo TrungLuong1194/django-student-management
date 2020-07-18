@@ -36,6 +36,11 @@
 		            <li class="nav-item">
 		              <a class="nav-link" href="{% url 'profile' user.username %}">Profile</a>
 		            </li>
+					{% endif %}
+				</ul>
+
+				<ul class="navbar-nav">
+					{% if user.is_authenticated %}
 					<li class="nav-item">
 						<a class="nav-link" href="{% url 'auth_logout' %}?next=/student/">Logout</a>
 					</li>

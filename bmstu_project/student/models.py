@@ -33,7 +33,7 @@ class UserProfile(models.Model):
 	studyYear = models.IntegerField(blank=False)
 	addressVN = models.CharField(max_length=128, blank=False)
 	addressRu = models.CharField(max_length=128, blank=False)
-	phone = models.IntegerField(unique=True, blank=False)
+	phone = models.IntegerField(blank=False)
 
 
 	def __str__(self):
