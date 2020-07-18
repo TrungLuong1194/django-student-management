@@ -17,8 +17,8 @@ class MajorForm(forms.ModelForm):
 class UserProfileForm(forms.ModelForm):
 
 	GENDER_CHOICES = ( 
-		("MALE", "Male"),
-		("FEMALE", "Female"),
+		("Nam", "Male"),
+		("Nữ", "Female"),
 	) 
 
 	major = forms.ModelChoiceField(queryset=Major.objects.all())
