@@ -1,0 +1,1 @@
+web: gunicorn bmstu_project.wsgi --log-file -
