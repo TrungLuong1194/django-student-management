@@ -95,6 +95,50 @@ def profile(request, username):
             'viSubject1': userprofile.viSubject1,
             'resultSubject1': userprofile.resultSubject1,
 
+            'ruSubject2': userprofile.ruSubject2,
+            'viSubject2': userprofile.viSubject2,
+            'resultSubject2': userprofile.resultSubject2,
+
+            'ruSubject3': userprofile.ruSubject3,
+            'viSubject3': userprofile.viSubject3,
+            'resultSubject3': userprofile.resultSubject3,
+
+            'ruSubject4': userprofile.ruSubject4,
+            'viSubject4': userprofile.viSubject4,
+            'resultSubject4': userprofile.resultSubject4,
+
+            'ruSubject5': userprofile.ruSubject5,
+            'viSubject5': userprofile.viSubject5,
+            'resultSubject5': userprofile.resultSubject5,
+
+            'ruSubject6': userprofile.ruSubject6,
+            'viSubject6': userprofile.viSubject6,
+            'resultSubject6': userprofile.resultSubject6,
+
+            'ruSubject7': userprofile.ruSubject7,
+            'viSubject7': userprofile.viSubject7,
+            'resultSubject7': userprofile.resultSubject7,
+
+            'ruSubject8': userprofile.ruSubject8,
+            'viSubject8': userprofile.viSubject8,
+            'resultSubject8': userprofile.resultSubject8,
+
+            'ruSubject9': userprofile.ruSubject9,
+            'viSubject9': userprofile.viSubject9,
+            'resultSubject9': userprofile.resultSubject9,
+
+            'ruSubject10': userprofile.ruSubject10,
+            'viSubject10': userprofile.viSubject10,
+            'resultSubject10': userprofile.resultSubject10,
+
+            'ruSubject11': userprofile.ruSubject11,
+            'viSubject11': userprofile.viSubject11,
+            'resultSubject11': userprofile.resultSubject11,
+
+            'ruSubject12': userprofile.ruSubject12,
+            'viSubject12': userprofile.viSubject12,
+            'resultSubject12': userprofile.resultSubject12,
+
             'nameBank': userprofile.nameBank,
             'nameAccount': userprofile.nameAccount,
         })
@@ -206,7 +250,7 @@ def report_document(request):
     GRADE_CHOICES = {
         "Giỏi": "Отлично",
         "Khá": "Хорошо",
-        "Trung Bình": "Удовлетворительно",
+        "TrungBình": "Удовлетворительно",
         "Đạt": "Зачтено"
     }
 
@@ -214,7 +258,62 @@ def report_document(request):
     if user_current.ruSubject1:
         paragraph2.add_run('- ' + user_current.ruSubject1).bold = True
         paragraph2.add_run(' (' + user_current.viSubject1 + '):').bold = True
-        paragraph2.add_run('\n  ' + GRADE_CHOICES[user_current.resultSubject1] + '(' + user_current.resultSubject1 + ')')
+        paragraph2.add_run('\n  ' + GRADE_CHOICES[user_current.resultSubject1] + ' (' + user_current.resultSubject1 + ')')
+
+    if user_current.ruSubject2:
+        paragraph2.add_run('\n- ' + user_current.ruSubject2).bold = True
+        paragraph2.add_run(' (' + user_current.viSubject2 + '):').bold = True
+        paragraph2.add_run('\n  ' + GRADE_CHOICES[user_current.resultSubject2] + ' (' + user_current.resultSubject2 + ')')
+
+    if user_current.ruSubject3:
+        paragraph2.add_run('\n- ' + user_current.ruSubject3).bold = True
+        paragraph2.add_run(' (' + user_current.viSubject3 + '):').bold = True
+        paragraph2.add_run('\n  ' + GRADE_CHOICES[user_current.resultSubject3] + ' (' + user_current.resultSubject3 + ')')
+
+    if user_current.ruSubject4:
+        paragraph2.add_run('\n- ' + user_current.ruSubject4).bold = True
+        paragraph2.add_run(' (' + user_current.viSubject4 + '):').bold = True
+        paragraph2.add_run('\n  ' + GRADE_CHOICES[user_current.resultSubject4] + ' (' + user_current.resultSubject4 + ')')
+
+    if user_current.ruSubject5:
+        paragraph2.add_run('\n- ' + user_current.ruSubject5).bold = True
+        paragraph2.add_run(' (' + user_current.viSubject5 + '):').bold = True
+        paragraph2.add_run('\n  ' + GRADE_CHOICES[user_current.resultSubject5] + ' (' + user_current.resultSubject5 + ')')
+
+    if user_current.ruSubject6:
+        paragraph2.add_run('\n- ' + user_current.ruSubject6).bold = True
+        paragraph2.add_run(' (' + user_current.viSubject6 + '):').bold = True
+        paragraph2.add_run('\n  ' + GRADE_CHOICES[user_current.resultSubject6] + ' (' + user_current.resultSubject6 + ')')
+
+    if user_current.ruSubject7:
+        paragraph2.add_run('\n- ' + user_current.ruSubject7).bold = True
+        paragraph2.add_run(' (' + user_current.viSubject7 + '):').bold = True
+        paragraph2.add_run('\n  ' + GRADE_CHOICES[user_current.resultSubject7] + ' (' + user_current.resultSubject7 + ')')
+
+    if user_current.ruSubject8:
+        paragraph2.add_run('\n- ' + user_current.ruSubject8).bold = True
+        paragraph2.add_run(' (' + user_current.viSubject8 + '):').bold = True
+        paragraph2.add_run('\n  ' + GRADE_CHOICES[user_current.resultSubject8] + ' (' + user_current.resultSubject8 + ')')
+
+    if user_current.ruSubject9:
+        paragraph2.add_run('\n- ' + user_current.ruSubject9).bold = True
+        paragraph2.add_run(' (' + user_current.viSubject9 + '):').bold = True
+        paragraph2.add_run('\n  ' + GRADE_CHOICES[user_current.resultSubject9] + ' (' + user_current.resultSubject9 + ')')
+
+    if user_current.ruSubject10:
+        paragraph2.add_run('\n- ' + user_current.ruSubject10).bold = True
+        paragraph2.add_run(' (' + user_current.viSubject10 + '):').bold = True
+        paragraph2.add_run('\n  ' + GRADE_CHOICES[user_current.resultSubject10] + ' (' + user_current.resultSubject10 + ')')
+
+    if user_current.ruSubject11:
+        paragraph2.add_run('\n- ' + user_current.ruSubject11).bold = True
+        paragraph2.add_run(' (' + user_current.viSubject11 + '):').bold = True
+        paragraph2.add_run('\n  ' + GRADE_CHOICES[user_current.resultSubject11] + ' (' + user_current.resultSubject11 + ')')
+
+    if user_current.ruSubject12:
+        paragraph2.add_run('\n- ' + user_current.ruSubject12).bold = True
+        paragraph2.add_run(' (' + user_current.viSubject12 + '):').bold = True
+        paragraph2.add_run('\n  ' + GRADE_CHOICES[user_current.resultSubject12] + ' (' + user_current.resultSubject12 + ')')
 
     paragraph2.add_run('\n18. Họ tên người hướng dẫn (supervisor) hoặc người tư vấn (adviser):.....')
     paragraph2.add_run('\nĐịa chỉ e-mail của người hướng dẫn/tư vấn:.....')

@@ -141,12 +141,14 @@
 		        <div class="form-group row">
 		            <label class="col-form-label col-sm-2 font-weight-bold">Subject 1 (RU)</label>
 		            <div class="col-sm-2">
-		                <input type="text" class="form-control" id="id_ruSubject1" name="ruSubject1" value="{{ userprofile.ruSubject1 }}"/>
+		                <input type="text" class="form-control" id="id_ruSubject1" name="ruSubject1" value="{{ userprofile.ruSubject1 }}" 
+		                placeholder="Введение в профильную подготовку"/>
 		            </div>
 
 		            <label class="col-form-label col-sm-2 font-weight-bold">Subject 1 (VN)</label>
 		            <div class="col-sm-2">
-		                <input type="text" class="form-control" id="id_viSubject1" name="viSubject1" value="{{ userprofile.viSubject1 }}"/>
+		                <input type="text" class="form-control" id="id_viSubject1" name="viSubject1" value="{{ userprofile.viSubject1 }}" 
+		                placeholder="Nhập môn kỹ thuật"/>
 		            </div>
 
 		            <label class="col-form-label col-sm-2 font-weight-bold">Grade</label>
@@ -159,6 +161,237 @@
 		            </div>
 		        </div>
 
+		        <div class="form-group row">
+		            <label class="col-form-label col-sm-2 font-weight-bold">Subject 2 (RU)</label>
+		            <div class="col-sm-2">
+		                <input type="text" class="form-control" id="id_ruSubject2" name="ruSubject2" value="{{ userprofile.ruSubject2 }}"/>
+		            </div>
+
+		            <label class="col-form-label col-sm-2 font-weight-bold">Subject 2 (VN)</label>
+		            <div class="col-sm-2">
+		                <input type="text" class="form-control" id="id_viSubject2" name="viSubject2" value="{{ userprofile.viSubject2 }}"/>
+		            </div>
+
+		            <label class="col-form-label col-sm-2 font-weight-bold">Grade</label>
+		            <div class="col-sm-2">
+		                <select id="id_resultSubject2" name="resultSubject2" class="form-control">
+		                    {% for x, y in form.resultSubject2.field.choices %}
+		                        <option value={{ x }} {% if form.resultSubject2.value == x %} selected {% endif %}>{{ y }}</option>
+		                    {% endfor %}
+		                </select>
+		            </div>
+		        </div>
+
+		        <div class="form-group row">
+		            <label class="col-form-label col-sm-2 font-weight-bold">Subject 3 (RU)</label>
+		            <div class="col-sm-2">
+		                <input type="text" class="form-control" id="id_ruSubject3" name="ruSubject3" value="{{ userprofile.ruSubject3 }}"/>
+		            </div>
+
+		            <label class="col-form-label col-sm-2 font-weight-bold">Subject 3 (VN)</label>
+		            <div class="col-sm-2">
+		                <input type="text" class="form-control" id="id_viSubject3" name="viSubject3" value="{{ userprofile.viSubject3 }}"/>
+		            </div>
+
+		            <label class="col-form-label col-sm-2 font-weight-bold">Grade</label>
+		            <div class="col-sm-2">
+		                <select id="id_resultSubject3" name="resultSubject3" class="form-control">
+		                    {% for x, y in form.resultSubject3.field.choices %}
+		                        <option value={{ x }} {% if form.resultSubject3.value == x %} selected {% endif %}>{{ y }}</option>
+		                    {% endfor %}
+		                </select>
+		            </div>
+		        </div>
+
+		        <div class="form-group row">
+		            <label class="col-form-label col-sm-2 font-weight-bold">Subject 4 (RU)</label>
+		            <div class="col-sm-2">
+		                <input type="text" class="form-control" id="id_ruSubject4" name="ruSubject4" value="{{ userprofile.ruSubject4 }}"/>
+		            </div>
+
+		            <label class="col-form-label col-sm-2 font-weight-bold">Subject 4 (VN)</label>
+		            <div class="col-sm-2">
+		                <input type="text" class="form-control" id="id_viSubject4" name="viSubject4" value="{{ userprofile.viSubject4 }}"/>
+		            </div>
+
+		            <label class="col-form-label col-sm-2 font-weight-bold">Grade</label>
+		            <div class="col-sm-2">
+		                <select id="id_resultSubject4" name="resultSubject4" class="form-control">
+		                    {% for x, y in form.resultSubject4.field.choices %}
+		                        <option value={{ x }} {% if form.resultSubject4.value == x %} selected {% endif %}>{{ y }}</option>
+		                    {% endfor %}
+		                </select>
+		            </div>
+		        </div>
+
+		        <div class="form-group row">
+		            <label class="col-form-label col-sm-2 font-weight-bold">Subject 5 (RU)</label>
+		            <div class="col-sm-2">
+		                <input type="text" class="form-control" id="id_ruSubject5" name="ruSubject5" value="{{ userprofile.ruSubject5 }}"/>
+		            </div>
+
+		            <label class="col-form-label col-sm-2 font-weight-bold">Subject 5 (VN)</label>
+		            <div class="col-sm-2">
+		                <input type="text" class="form-control" id="id_viSubject5" name="viSubject5" value="{{ userprofile.viSubject5 }}"/>
+		            </div>
+
+		            <label class="col-form-label col-sm-2 font-weight-bold">Grade</label>
+		            <div class="col-sm-2">
+		                <select id="id_resultSubject5" name="resultSubject5" class="form-control">
+		                    {% for x, y in form.resultSubject5.field.choices %}
+		                        <option value={{ x }} {% if form.resultSubject5.value == x %} selected {% endif %}>{{ y }}</option>
+		                    {% endfor %}
+		                </select>
+		            </div>
+		        </div>
+
+		        <div class="form-group row">
+		            <label class="col-form-label col-sm-2 font-weight-bold">Subject 6 (RU)</label>
+		            <div class="col-sm-2">
+		                <input type="text" class="form-control" id="id_ruSubject6" name="ruSubject6" value="{{ userprofile.ruSubject6 }}"/>
+		            </div>
+
+		            <label class="col-form-label col-sm-2 font-weight-bold">Subject 6 (VN)</label>
+		            <div class="col-sm-2">
+		                <input type="text" class="form-control" id="id_viSubject6" name="viSubject6" value="{{ userprofile.viSubject6 }}"/>
+		            </div>
+
+		            <label class="col-form-label col-sm-2 font-weight-bold">Grade</label>
+		            <div class="col-sm-2">
+		                <select id="id_resultSubject6" name="resultSubject6" class="form-control">
+		                    {% for x, y in form.resultSubject6.field.choices %}
+		                        <option value={{ x }} {% if form.resultSubject6.value == x %} selected {% endif %}>{{ y }}</option>
+		                    {% endfor %}
+		                </select>
+		            </div>
+		        </div>
+
+		        <div class="form-group row">
+		            <label class="col-form-label col-sm-2 font-weight-bold">Subject 7 (RU)</label>
+		            <div class="col-sm-2">
+		                <input type="text" class="form-control" id="id_ruSubject7" name="ruSubject7" value="{{ userprofile.ruSubject7 }}"/>
+		            </div>
+
+		            <label class="col-form-label col-sm-2 font-weight-bold">Subject 7 (VN)</label>
+		            <div class="col-sm-2">
+		                <input type="text" class="form-control" id="id_viSubject7" name="viSubject7" value="{{ userprofile.viSubject7 }}"/>
+		            </div>
+
+		            <label class="col-form-label col-sm-2 font-weight-bold">Grade</label>
+		            <div class="col-sm-2">
+		                <select id="id_resultSubject7" name="resultSubject7" class="form-control">
+		                    {% for x, y in form.resultSubject7.field.choices %}
+		                        <option value={{ x }} {% if form.resultSubject7.value == x %} selected {% endif %}>{{ y }}</option>
+		                    {% endfor %}
+		                </select>
+		            </div>
+		        </div>
+
+		        <div class="form-group row">
+		            <label class="col-form-label col-sm-2 font-weight-bold">Subject 8 (RU)</label>
+		            <div class="col-sm-2">
+		                <input type="text" class="form-control" id="id_ruSubject8" name="ruSubject8" value="{{ userprofile.ruSubject8 }}"/>
+		            </div>
+
+		            <label class="col-form-label col-sm-2 font-weight-bold">Subject 8 (VN)</label>
+		            <div class="col-sm-2">
+		                <input type="text" class="form-control" id="id_viSubject8" name="viSubject8" value="{{ userprofile.viSubject8 }}"/>
+		            </div>
+
+		            <label class="col-form-label col-sm-2 font-weight-bold">Grade</label>
+		            <div class="col-sm-2">
+		                <select id="id_resultSubject8" name="resultSubject8" class="form-control">
+		                    {% for x, y in form.resultSubject8.field.choices %}
+		                        <option value={{ x }} {% if form.resultSubject8.value == x %} selected {% endif %}>{{ y }}</option>
+		                    {% endfor %}
+		                </select>
+		            </div>
+		        </div>
+
+		        <div class="form-group row">
+		            <label class="col-form-label col-sm-2 font-weight-bold">Subject 9 (RU)</label>
+		            <div class="col-sm-2">
+		                <input type="text" class="form-control" id="id_ruSubject9" name="ruSubject9" value="{{ userprofile.ruSubject9 }}"/>
+		            </div>
+
+		            <label class="col-form-label col-sm-2 font-weight-bold">Subject 9 (VN)</label>
+		            <div class="col-sm-2">
+		                <input type="text" class="form-control" id="id_viSubject9" name="viSubject9" value="{{ userprofile.viSubject9 }}"/>
+		            </div>
+
+		            <label class="col-form-label col-sm-2 font-weight-bold">Grade</label>
+		            <div class="col-sm-2">
+		                <select id="id_resultSubject9" name="resultSubject9" class="form-control">
+		                    {% for x, y in form.resultSubject9.field.choices %}
+		                        <option value={{ x }} {% if form.resultSubject9.value == x %} selected {% endif %}>{{ y }}</option>
+		                    {% endfor %}
+		                </select>
+		            </div>
+		        </div>
+
+		        <div class="form-group row">
+		            <label class="col-form-label col-sm-2 font-weight-bold">Subject 10 (RU)</label>
+		            <div class="col-sm-2">
+		                <input type="text" class="form-control" id="id_ruSubject10" name="ruSubject10" value="{{ userprofile.ruSubject10 }}"/>
+		            </div>
+
+		            <label class="col-form-label col-sm-2 font-weight-bold">Subject 10 (VN)</label>
+		            <div class="col-sm-2">
+		                <input type="text" class="form-control" id="id_viSubject10" name="viSubject10" value="{{ userprofile.viSubject10 }}"/>
+		            </div>
+
+		            <label class="col-form-label col-sm-2 font-weight-bold">Grade</label>
+		            <div class="col-sm-2">
+		                <select id="id_resultSubject10" name="resultSubject10" class="form-control">
+		                    {% for x, y in form.resultSubject10.field.choices %}
+		                        <option value={{ x }} {% if form.resultSubject10.value == x %} selected {% endif %}>{{ y }}</option>
+		                    {% endfor %}
+		                </select>
+		            </div>
+		        </div>
+
+		        <div class="form-group row">
+		            <label class="col-form-label col-sm-2 font-weight-bold">Subject 11 (RU)</label>
+		            <div class="col-sm-2">
+		                <input type="text" class="form-control" id="id_ruSubject11" name="ruSubject11" value="{{ userprofile.ruSubject11 }}"/>
+		            </div>
+
+		            <label class="col-form-label col-sm-2 font-weight-bold">Subject 11 (VN)</label>
+		            <div class="col-sm-2">
+		                <input type="text" class="form-control" id="id_viSubject11" name="viSubject11" value="{{ userprofile.viSubject11 }}"/>
+		            </div>
+
+		            <label class="col-form-label col-sm-2 font-weight-bold">Grade</label>
+		            <div class="col-sm-2">
+		                <select id="id_resultSubject11" name="resultSubject11" class="form-control">
+		                    {% for x, y in form.resultSubject11.field.choices %}
+		                        <option value={{ x }} {% if form.resultSubject11.value == x %} selected {% endif %}>{{ y }}</option>
+		                    {% endfor %}
+		                </select>
+		            </div>
+		        </div>
+
+		        <div class="form-group row">
+		            <label class="col-form-label col-sm-2 font-weight-bold">Subject 12 (RU)</label>
+		            <div class="col-sm-2">
+		                <input type="text" class="form-control" id="id_ruSubject12" name="ruSubject12" value="{{ userprofile.ruSubject12 }}"/>
+		            </div>
+
+		            <label class="col-form-label col-sm-2 font-weight-bold">Subject 12 (VN)</label>
+		            <div class="col-sm-2">
+		                <input type="text" class="form-control" id="id_viSubject12" name="viSubject12" value="{{ userprofile.viSubject12 }}"/>
+		            </div>
+
+		            <label class="col-form-label col-sm-2 font-weight-bold">Grade</label>
+		            <div class="col-sm-2">
+		                <select id="id_resultSubject12" name="resultSubject12" class="form-control">
+		                    {% for x, y in form.resultSubject12.field.choices %}
+		                        <option value={{ x }} {% if form.resultSubject12.value == x %} selected {% endif %}>{{ y }}</option>
+		                    {% endfor %}
+		                </select>
+		            </div>
+		        </div>
+
 		        <hr/>
 				<h6 class="font-weight-normal text-center">INFORMATION OF BANK</h6>
 				<hr/>
@@ -166,12 +399,12 @@
 		        <div class="form-group row">
 		            <label class="col-form-label col-sm-2 font-weight-bold">Bank</label>
 		            <div class="col-sm-4">
-		                <input type="text" class="form-control" id="id_nameBank" name="nameBank" value="{{ userprofile.nameBank }}" required/>
+		                <input type="text" class="form-control" id="id_nameBank" name="nameBank" value="{{ userprofile.nameBank }}"/>
 		            </div>
 
 		            <label class="col-form-label col-sm-2 font-weight-bold">Name Account</label>
 		            <div class="col-sm-4">
-		                <input type="text" class="form-control" id="id_nameAccount" name="nameAccount" value="{{ userprofile.nameAccount }}" required/>
+		                <input type="text" class="form-control" id="id_nameAccount" name="nameAccount" value="{{ userprofile.nameAccount }}"/>
 		            </div>
 		        </div>
 
