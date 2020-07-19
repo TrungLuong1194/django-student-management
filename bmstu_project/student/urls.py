@@ -9,4 +9,5 @@ urlpatterns = [
 	url(r'^register_profile/$', views.register_profile, name='register_profile'),
 	url(r'^profile/(?P<username>[\w\-]+)/$', views.profile, name='profile'),
 	url(r'^profiles/$', views.profiles_list, name='profiles_list'),
+	url(r'^report/$', views.report_document, name='report_document'),
 ]
