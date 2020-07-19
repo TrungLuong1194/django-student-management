@@ -56,7 +56,7 @@
 
             <label class="col-form-label col-sm-2 font-weight-bold">Study Year</label>
             <div class="col-sm-2">
-                <input type="number" class="form-control" id="id_studyYear" name="studyYear" required />
+                <input type="number" class="form-control" id="id_studyYear" name="studyYear" min="2000" required />
             </div>
         </div>
 
@@ -68,21 +68,21 @@
 
             <label class="col-form-label col-sm-2 font-weight-bold">Phone</label>
             <div class="col-sm-4">
-                <input type="phone" class="form-control" id="id_phone" name="phone" required />
+                <input type="text" class="form-control" id="id_phone" name="phone" placeholder="+79 54325345..." required />
             </div>
         </div>
 
         <div class="form-group row">
             <label class="col-form-label col-sm-2 font-weight-bold">Ethnic</label>
             <div class="col-sm-10">
-                <input type="text" class="form-control" id="id_ethnic" name="ethnic" placeholder="Dan toc: Kinh..." required />
+                <input type="text" class="form-control" id="id_ethnic" name="ethnic" placeholder="Dân tộc: Kinh..." required />
             </div>
         </div>
 
         <div class="form-group row">
             <label class="col-form-label col-sm-2 font-weight-bold">Religion</label>
             <div class="col-sm-10">
-                <input type="text" class="form-control" id="id_religion" name="religion" placeholder="Ton giao: Khong..." required />
+                <input type="text" class="form-control" id="id_religion" name="religion" placeholder="Tôn giáo: Không..." required />
             </div>
         </div>
 
@@ -97,6 +97,78 @@
             <label class="col-form-label col-sm-2 font-weight-bold">Address in Russia</label>
             <div class="col-sm-10">
                 <input type="text" class="form-control" id="id_addressRu" name="addressRu" required />
+            </div>
+        </div>
+
+        <div class="form-group row">
+            <label class="col-form-label col-sm-2 font-weight-bold">Work Place</label>
+            <div class="col-sm-10">
+                <input type="text" class="form-control" id="id_workPlace" name="workPlace" />
+            </div>
+        </div>
+
+        <div class="form-group row">
+            <label class="col-form-label col-sm-2 font-weight-bold">Date Admission</label>
+            <div class="col-sm-4">
+                <input type="date" class="form-control" id="id_dateOfAdmission" name="dateOfAdmission" required />
+            </div>
+
+            <label class="col-form-label col-sm-2 font-weight-bold">Date Study</label>
+            <div class="col-sm-4">
+                <input type="date" class="form-control" id="id_dateOfStudy" name="dateOfStudy" required />
+            </div>
+        </div>
+
+        <div class="form-group row">
+            <label class="col-form-label col-sm-2 font-weight-bold">Time Study</label>
+            <div class="col-sm-4">
+                <input type="text" class="form-control" id="id_timeOfStudy" name="timeOfStudy" placeholder="2018-2022" required/>
+            </div>
+
+            <label class="col-form-label col-sm-2 font-weight-bold">Info Study</label>
+            <div class="col-sm-4">
+                <input type="text" class="form-control" id="id_infoOfStudy" name="infoOfStudy" placeholder="Học kì 2 - năm 1, còn lại 3 năm" required/>
+            </div>
+        </div>
+
+        <hr/>
+        <h6 class="font-weight-normal text-center">RESULT OF STUDY</h6>
+        <hr/>
+
+        <div class="form-group row">
+            <label class="col-form-label col-sm-2 font-weight-bold">Subject 1 (RU)</label>
+            <div class="col-sm-2">
+                <input type="text" class="form-control" id="id_ruSubject1" name="ruSubject1" placeholder="Введение в профильную подготовку"/>
+            </div>
+
+            <label class="col-form-label col-sm-2 font-weight-bold">Subject 1 (VN)</label>
+            <div class="col-sm-2">
+                <input type="text" class="form-control" id="id_viSubject1" name="viSubject1" placeholder="Nhập môn kỹ thuật"/>
+            </div>
+
+            <label class="col-form-label col-sm-2 font-weight-bold">Grade</label>
+            <div class="col-sm-2">
+                <select id="id_resultSubject1" name="resultSubject1" class="form-control">
+                    {% for x, y in form.resultSubject1.field.choices %}
+                        <option value={{ x }}>{{ y }}</option>
+                    {% endfor %}
+                </select>
+            </div>
+        </div>
+
+        <hr/>
+        <h6 class="font-weight-normal text-center">INFORMATION OF BANK</h6>
+        <hr/>
+
+        <div class="form-group row">
+            <label class="col-form-label col-sm-2 font-weight-bold">Bank</label>
+            <div class="col-sm-4">
+                <input type="text" class="form-control" id="id_nameBank" name="nameBank" placeholder="SBERBANK" required/>
+            </div>
+
+            <label class="col-form-label col-sm-2 font-weight-bold">Name Account</label>
+            <div class="col-sm-4">
+                <input type="text" class="form-control" id="id_nameAccount" name="nameAccount" placeholder="ZYONG" required/>
             </div>
         </div>
 

@@ -33,7 +33,21 @@ class UserProfile(models.Model):
 	studyYear = models.IntegerField(blank=False)
 	addressVN = models.CharField(max_length=128, blank=False)
 	addressRu = models.CharField(max_length=128, blank=False)
-	phone = models.IntegerField(blank=False)
+	phone = models.CharField(max_length=128, blank=False)
+	workPlace = models.CharField(max_length=128, blank=True)
+	dateOfAdmission = models.DateField(blank=False)  # Ngay nhap hoc
+	dateOfStudy = models.DateField(blank=False)  # Ngay bat dau khoa hoc
+	timeOfStudy = models.CharField(max_length=128, blank=False)  # Thoi gian dao tao
+	infoOfStudy = models.CharField(max_length=128, blank=False)  # Dang hoc hoc ki ?
+
+	# Result of study
+	ruSubject1 = models.CharField(max_length=128, blank=True)
+	viSubject1 = models.CharField(max_length=128, blank=True)
+	resultSubject1 = models.CharField(max_length=20, blank=True)
+
+	# Information of Bank
+	nameBank = models.CharField(max_length=128, blank=False)
+	nameAccount = models.CharField(max_length=128, blank=False)  # Ten tai khoan tieng Nga
 
 
 	def __str__(self):

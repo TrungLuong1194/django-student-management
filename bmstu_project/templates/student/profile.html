@@ -7,7 +7,7 @@
 
 {% block body_block %}
 	<hr/>
-	<h3 class="font-weight-normal">{{ selecteduser.username }} Profile</h3>
+	<h6 class="font-weight-normal text-center">{{ selecteduser.username }} Profile</h6>
 	<hr/>
 
 	<div>
@@ -58,7 +58,7 @@
 
 		            <label class="col-form-label col-sm-2 font-weight-bold">Study Year</label>
 		            <div class="col-sm-2">
-		                <input type="number" class="form-control" id="id_studyYear" name="studyYear" value="{{ userprofile.studyYear }}" required />
+		                <input type="number" class="form-control" id="id_studyYear" name="studyYear" value="{{ userprofile.studyYear }}" min="2000" required />
 		            </div>
 		        </div>
 
@@ -70,7 +70,7 @@
 
 		            <label class="col-form-label col-sm-2 font-weight-bold">Phone</label>
 		            <div class="col-sm-4">
-		                <input type="phone" class="form-control" id="id_phone" name="phone" value="{{ userprofile.phone }}" required />
+		                <input type="text" class="form-control" id="id_phone" name="phone" value="{{ userprofile.phone }}" required />
 		            </div>
 		        </div>
 
@@ -99,6 +99,79 @@
 		            <label class="col-form-label col-sm-2 font-weight-bold">Address in Russia</label>
 		            <div class="col-sm-10">
 		                <input type="text" class="form-control" id="id_addressRu" name="addressRu" value="{{ userprofile.addressRu }}" required />
+		            </div>
+		        </div>
+
+		        <div class="form-group row">
+		            <label class="col-form-label col-sm-2 font-weight-bold">Work Place</label>
+		            <div class="col-sm-10">
+		                <input type="text" class="form-control" id="id_workPlace" name="workPlace" value="{{ userprofile.workPlace }}"/>
+		            </div>
+		        </div>
+
+		        <div class="form-group row">
+		            <label class="col-form-label col-sm-2 font-weight-bold">Date Admission</label>
+		            <div class="col-sm-4">
+		                <input type="date" class="form-control" id="id_dateOfAdmission" name="dateOfAdmission" value="{{ userprofile.dateOfAdmission|date:'Y-m-d' }}" required />
+		            </div>
+
+		            <label class="col-form-label col-sm-2 font-weight-bold">Date Study</label>
+		            <div class="col-sm-4">
+		                <input type="date" class="form-control" id="id_dateOfStudy" name="dateOfStudy" 
+		                value="{{ userprofile.dateOfStudy|date:'Y-m-d' }}" required />
+		            </div>
+		        </div>
+
+		        <div class="form-group row">
+		            <label class="col-form-label col-sm-2 font-weight-bold">Time Study</label>
+		            <div class="col-sm-4">
+		                <input type="text" class="form-control" id="id_timeOfStudy" name="timeOfStudy" value="{{ userprofile.timeOfStudy }}" required/>
+		            </div>
+
+		            <label class="col-form-label col-sm-2 font-weight-bold">Info Study</label>
+		            <div class="col-sm-4">
+		                <input type="text" class="form-control" id="id_infoOfStudy" name="infoOfStudy" value="{{ userprofile.infoOfStudy }}" required/>
+		            </div>
+		        </div>
+
+		        <hr/>
+				<h6 class="font-weight-normal text-center">RESULT OF STUDY</h6>
+				<hr/>
+
+		        <div class="form-group row">
+		            <label class="col-form-label col-sm-2 font-weight-bold">Subject 1 (RU)</label>
+		            <div class="col-sm-2">
+		                <input type="text" class="form-control" id="id_ruSubject1" name="ruSubject1" value="{{ userprofile.ruSubject1 }}"/>
+		            </div>
+
+		            <label class="col-form-label col-sm-2 font-weight-bold">Subject 1 (VN)</label>
+		            <div class="col-sm-2">
+		                <input type="text" class="form-control" id="id_viSubject1" name="viSubject1" value="{{ userprofile.viSubject1 }}"/>
+		            </div>
+
+		            <label class="col-form-label col-sm-2 font-weight-bold">Grade</label>
+		            <div class="col-sm-2">
+		                <select id="id_resultSubject1" name="resultSubject1" class="form-control">
+		                    {% for x, y in form.resultSubject1.field.choices %}
+		                        <option value={{ x }} {% if form.resultSubject1.value == x %} selected {% endif %}>{{ y }}</option>
+		                    {% endfor %}
+		                </select>
+		            </div>
+		        </div>
+
+		        <hr/>
+				<h6 class="font-weight-normal text-center">INFORMATION OF BANK</h6>
+				<hr/>
+
+		        <div class="form-group row">
+		            <label class="col-form-label col-sm-2 font-weight-bold">Bank</label>
+		            <div class="col-sm-4">
+		                <input type="text" class="form-control" id="id_nameBank" name="nameBank" value="{{ userprofile.nameBank }}" required/>
+		            </div>
+
+		            <label class="col-form-label col-sm-2 font-weight-bold">Name Account</label>
+		            <div class="col-sm-4">
+		                <input type="text" class="form-control" id="id_nameAccount" name="nameAccount" value="{{ userprofile.nameAccount }}" required/>
 		            </div>
 		        </div>
 

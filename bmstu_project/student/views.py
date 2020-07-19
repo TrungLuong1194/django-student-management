@@ -85,6 +85,18 @@ def profile(request, username):
             'addressVN': userprofile.addressVN,
             'addressRu': userprofile.addressRu,
             'phone': userprofile.phone,
+            'workPlace': userprofile.workPlace,
+            'dateOfAdmission': userprofile.dateOfAdmission,
+            'dateOfStudy': userprofile.dateOfStudy,
+            'timeOfStudy': userprofile.timeOfStudy,
+            'infoOfStudy': userprofile.infoOfStudy,
+
+            'ruSubject1': userprofile.ruSubject1,
+            'viSubject1': userprofile.viSubject1,
+            'resultSubject1': userprofile.resultSubject1,
+
+            'nameBank': userprofile.nameBank,
+            'nameAccount': userprofile.nameAccount,
         })
     
     if request.method == 'POST':
@@ -136,56 +148,73 @@ def report_document(request):
     paragraph2.add_run('\n1. Họ và tên: ')
     paragraph2.add_run(user_current.fullName).bold = True
     paragraph2.add_run('\t\t\t\tNam/nữ: ')
-    paragraph2.add_run(user_current.gender)
+    paragraph2.add_run(user_current.gender).bold = True
 
     paragraph2.add_run('\n2. Ngày sinh: ')
     paragraph2.add_run(user_current.birthday.strftime('%d/%m/%Y')).bold = True
 
     paragraph2.add_run('\n3. Dân tộc: ')
-    paragraph2.add_run(user_current.ethnic)
+    paragraph2.add_run(user_current.ethnic).bold = True
     paragraph2.add_run('\t\t\t\t\t\t\tTôn giáo: ')
-    paragraph2.add_run(user_current.religion)
+    paragraph2.add_run(user_current.religion).bold = True
 
     paragraph2.add_run('\n4. Năm trúng tuyển (đối với lưu học sinh học bổng): ')
-    paragraph2.add_run(str(user_current.studyYear))
+    paragraph2.add_run(str(user_current.studyYear)).bold = True
     paragraph2.add_run('.Năm đi học: ')
-    paragraph2.add_run(str(user_current.studyYear))
+    paragraph2.add_run(str(user_current.studyYear)).bold = True
 
     paragraph2.add_run('\n5. Địa chỉ nơi ở tại Việt Nam: ')
-    paragraph2.add_run(user_current.addressVN)
+    paragraph2.add_run(user_current.addressVN).bold = True
 
-    paragraph2.add_run('\n6. Cơ quan công tác (nếu có):')
+    paragraph2.add_run('\n6. Cơ quan công tác (nếu có): ')
+    if user_current.workPlace:
+        paragraph2.add_run(user_current.workPlace).bold = True
 
-    paragraph2.add_run('\n7. Diện học bổng (Hiệp định/NSNN/Khác, ghi cụ thể): Hiệp định')
+    paragraph2.add_run('\n7. Diện học bổng (Hiệp định/NSNN/Khác, ghi cụ thể): ')
+    paragraph2.add_run('Hiệp định').bold = True
 
     paragraph2.add_run('\n8. Ngành học ở nước ngoài (ghi tiếng Việt và tiếng Anh):\n')
-    paragraph2.add_run('    ' + user_current.major.viName)
-    paragraph2.add_run(' (' + user_current.major.enName + ')')
+    paragraph2.add_run('    ' + user_current.major.viName).bold = True
+    paragraph2.add_run(' (' + user_current.major.enName + ')').bold = True
 
     paragraph2.add_run('\n9. Tên và địa chỉ trường học ở nước ngoài (ghi tiếng Việt và tiếng Anh):\n\
     Đại học Kỹ thuật Quốc gia Mát-xcơ-va mang tên N.E. Bauman\n\
     (Bauman Moscow State Technical University)\n\
     Địa chỉ: số 5, đường Baumanskaya-2, Mát-xcơ-va, 105005')
 
-    paragraph2.add_run('\n10. Ngày đến trường nhập học:')
+    paragraph2.add_run('\n10. Ngày đến trường nhập học: ')
+    paragraph2.add_run(user_current.dateOfAdmission.strftime('%d/%m/%Y')).bold = True
 
-    paragraph2.add_run('\n11. Ngày bắt đầu khóa học (theo thông báo của trường):')
+    paragraph2.add_run('\n11. Ngày bắt đầu khóa học (theo thông báo của trường): ')
+    paragraph2.add_run(user_current.dateOfStudy.strftime('%d/%m/%Y')).bold = True
 
-    paragraph2.add_run('\n12. Thời gian đào tạo (theo thông báo của trường):')
+    paragraph2.add_run('\n12. Thời gian đào tạo (theo thông báo của trường): ')
+    paragraph2.add_run(user_current.timeOfStudy).bold = True
 
-    paragraph2.add_run('\n13. Đang học học kỳ mấy, thời gian còn lại:')
+    paragraph2.add_run('\n13. Đang học học kỳ mấy, thời gian còn lại: ')
+    paragraph2.add_run(user_current.infoOfStudy).bold = True
 
     paragraph2.add_run('\n14. Địa chỉ nơi ở nước ngoài: ')
-    paragraph2.add_run(user_current.addressRu)
+    paragraph2.add_run(user_current.addressRu).bold = True
 
     paragraph2.add_run('\n15. E-mail ở nước ngoài: ')
-    paragraph2.add_run(request.user.email)
+    paragraph2.add_run(request.user.email).bold = True
 
     paragraph2.add_run('\n16. Điện thoại liên hệ ở nước ngoài: ')
-    paragraph2.add_run(str(user_current.phone))
+    paragraph2.add_run(str(user_current.phone)).bold = True
 
-    paragraph2.add_run('\n17. Kết quả học tập:')
-    paragraph2.add_run('\n\n\n')
+    GRADE_CHOICES = {
+        "Giỏi": "Отлично",
+        "Khá": "Хорошо",
+        "Trung Bình": "Удовлетворительно",
+        "Đạt": "Зачтено"
+    }
+
+    paragraph2.add_run('\n17. Kết quả học tập:\n')
+    if user_current.ruSubject1:
+        paragraph2.add_run('- ' + user_current.ruSubject1).bold = True
+        paragraph2.add_run(' (' + user_current.viSubject1 + '):').bold = True
+        paragraph2.add_run('\n  ' + GRADE_CHOICES[user_current.resultSubject1] + '(' + user_current.resultSubject1 + ')')
 
     paragraph2.add_run('\n18. Họ tên người hướng dẫn (supervisor) hoặc người tư vấn (adviser):.....')
     paragraph2.add_run('\nĐịa chỉ e-mail của người hướng dẫn/tư vấn:.....')
@@ -200,20 +229,39 @@ def report_document(request):
     table1 = document.add_table(rows=1, cols=3, style='Table Grid')
     row = table1.rows[0]
 
-    row.cells[0].text = '- Tên ngân hàng:\n\n- Địa chỉ ngân hàng:\nMoscow, Russia\n- Mã số ngân hàng (Swift Code):\n\n- Thông tin ngân hàng trung gian (nếu có):'
+    paragraph3 = row.cells[0].add_paragraph()
+    paragraph3.add_run('- Tên ngân hàng:\n')
+    paragraph3.add_run(user_current.nameBank).bold = True
+    paragraph3.add_run('\n- Địa chỉ ngân hàng:')
+    paragraph3.add_run('\nMoscow, Russia').bold = True
+    paragraph3.add_run('\n- Mã số ngân hàng (Swift Code):\n\n')
+    paragraph3.add_run('- Thông tin ngân hàng trung gian (nếu có):\n')
 
-    row.cells[1].text = '- Tên người hưởng (chủ tài khoản cá nhân):\n\n- Địa chỉ người hưởng:'
+    paragraph4 = row.cells[1].add_paragraph()
+    paragraph4.add_run('- Tên người hưởng:\n')
+    paragraph4.add_run('(chủ tài khoản cá nhân):\n')
+    paragraph4.add_run(user_current.nameAccount).bold = True
+    paragraph4.add_run('\n- Địa chỉ người hưởng:')
+    paragraph4.add_run('\nMoscow, Russia').bold = True
 
-    row.cells[2].text = '- Số tài khoản:\n\n- Số Iban (nếu có):'
+    paragraph5 = row.cells[2].add_paragraph()
+    paragraph5.add_run('- Số tài khoản:\n\n')
+    paragraph5.add_run('- Số Iban (nếu có):')
 
     document.add_paragraph()
 
     table2 = document.add_table(rows=1, cols=2)
     row = table2.rows[0]
 
-    row.cells[0].add_paragraph('Xác nhận của đơn vị\nĐơn vị trưởng\n\n\n\n\n\n\nPhạm Xuân Trường').alignment = WD_ALIGN_PARAGRAPH.CENTER
+    paragraph6 = row.cells[0].add_paragraph()
+    paragraph6.alignment = WD_ALIGN_PARAGRAPH.CENTER
+    paragraph6.add_run('Xác nhận của đơn vị\nĐơn vị trưởng').bold = True
 
-    row.cells[1].add_paragraph('Mát-xcơ-va, ngày  tháng  năm 20\nNgười báo cáo\n(Ký và ghi rõ họ tên)\n\n\n\n\n\n' + user_current.fullName).alignment = WD_ALIGN_PARAGRAPH.CENTER
+    paragraph7 = row.cells[1].add_paragraph()
+    paragraph7.alignment = WD_ALIGN_PARAGRAPH.CENTER
+    paragraph7.add_run('Mát-xcơ-va, ngày  tháng  năm 20  ')
+    paragraph7.add_run('\nNgười báo cáo').bold = True
+    paragraph7.add_run('\n\n\n\n\n\n' + user_current.fullName).bold = True
 
     # Prepare document for download        
     f = BytesIO()
