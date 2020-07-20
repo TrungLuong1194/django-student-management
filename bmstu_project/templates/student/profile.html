@@ -7,7 +7,7 @@
 
 {% block body_block %}
 	<hr/>
-	<h3 class="font-weight-normal">{{ selecteduser.username }} Profile</h3>
+	<h6 class="font-weight-normal text-center">{{ selecteduser.username }} Profile</h6>
 	<hr/>
 
 	<div>
@@ -31,14 +31,14 @@
 		        {% endif %}
 
 				<div class="form-group row">
-		            <label class="col-form-label col-sm-2 font-weight-bold">Full Name</label>
+		            <label class="col-form-label col-sm-2 font-weight-bold">Họ và tên</label>
 		            <div class="col-sm-10">
 		                <input type="text" class="form-control" id="id_fullName" name="fullName" value="{{ userprofile.fullName }}" required />
 		            </div>
 		        </div>
 				
 				<div class="form-group row">
-		            <label class="col-form-label col-sm-2 font-weight-bold">Major</label>
+		            <label class="col-form-label col-sm-2 font-weight-bold">Ngành học</label>
 		            <div class="col-sm-2">
 			            <select id="id_major" name="major" class="form-control">
 			            	{% for choice in form.major.field.queryset %}
@@ -47,7 +47,7 @@
 						</select>
 					</div>
 
-					<label class="col-form-label col-sm-2 font-weight-bold">Gender</label>
+					<label class="col-form-label col-sm-2 font-weight-bold">Nam/Nữ</label>
 		            <div class="col-sm-2">
 		                <select id="id_gender" name="gender" class="form-control">
 			            	{% for x, y in form.gender.field.choices %}
@@ -56,57 +56,364 @@
 						</select>
 		            </div>
 
-		            <label class="col-form-label col-sm-2 font-weight-bold">Study Year</label>
+		            <label class="col-form-label col-sm-2 font-weight-bold">Năm đi học</label>
 		            <div class="col-sm-2">
-		                <input type="number" class="form-control" id="id_studyYear" name="studyYear" value="{{ userprofile.studyYear }}" required />
+		                <input type="number" class="form-control" id="id_studyYear" name="studyYear" value="{{ userprofile.studyYear }}" min="2000" required />
 		            </div>
 		        </div>
 
 		        <div class="form-group row">
-		            <label class="col-form-label col-sm-2 font-weight-bold">Birthday</label>
+		            <label class="col-form-label col-sm-2 font-weight-bold">Ngày sinh</label>
 		            <div class="col-sm-4">
 		                <input type="date" class="form-control" id="id_birthday" name="birthday" value="{{ userprofile.birthday|date:'Y-m-d' }}" required />
 		            </div>
 
-		            <label class="col-form-label col-sm-2 font-weight-bold">Phone</label>
+		            <label class="col-form-label col-sm-2 font-weight-bold">Số điện thoại</label>
 		            <div class="col-sm-4">
-		                <input type="phone" class="form-control" id="id_phone" name="phone" value="{{ userprofile.phone }}" required />
+		                <input type="text" class="form-control" id="id_phone" name="phone" value="{{ userprofile.phone }}" required />
 		            </div>
 		        </div>
 
 		        <div class="form-group row">
-		            <label class="col-form-label col-sm-2 font-weight-bold">Ethnic</label>
+		            <label class="col-form-label col-sm-2 font-weight-bold">Dân tộc</label>
 		            <div class="col-sm-10">
 		                <input type="text" class="form-control" id="id_ethnic" name="ethnic" value="{{ userprofile.ethnic }}" required />
 		            </div>
 		        </div>
 
 		        <div class="form-group row">
-		            <label class="col-form-label col-sm-2 font-weight-bold">Religion</label>
+		            <label class="col-form-label col-sm-2 font-weight-bold">Tôn giáo</label>
 		            <div class="col-sm-10">
 		                <input type="text" class="form-control" id="id_religion" name="religion" value="{{ userprofile.religion }}" required />
 		            </div>
 		        </div>
 
 		        <div class="form-group row">
-		            <label class="col-form-label col-sm-2 font-weight-bold">Address in VN</label>
+		            <label class="col-form-label col-sm-2 font-weight-bold">Địa chỉ VN</label>
 		            <div class="col-sm-10">
 		                <input type="text" class="form-control" id="id_addressVN" name="addressVN" value="{{ userprofile.addressVN }}" required />
 		            </div>
 		        </div>
 
 		        <div class="form-group row">
-		            <label class="col-form-label col-sm-2 font-weight-bold">Address in Russia</label>
+		            <label class="col-form-label col-sm-2 font-weight-bold">Địa chỉ Nga</label>
 		            <div class="col-sm-10">
 		                <input type="text" class="form-control" id="id_addressRu" name="addressRu" value="{{ userprofile.addressRu }}" required />
+		            </div>
+		        </div>
+
+		        <div class="form-group row">
+		            <label class="col-form-label col-sm-2 font-weight-bold">Cơ quan công tác (Nếu có)</label>
+		            <div class="col-sm-10">
+		                <input type="text" class="form-control" id="id_workPlace" name="workPlace" value="{{ userprofile.workPlace }}"/>
+		            </div>
+		        </div>
+
+		        <div class="form-group row">
+		            <label class="col-form-label col-sm-2 font-weight-bold">Ngày nhập học</label>
+		            <div class="col-sm-4">
+		                <input type="date" class="form-control" id="id_dateOfAdmission" name="dateOfAdmission" value="{{ userprofile.dateOfAdmission|date:'Y-m-d' }}" required />
+		            </div>
+
+		            <label class="col-form-label col-sm-2 font-weight-bold">Ngày bắt đầu khóa học</label>
+		            <div class="col-sm-4">
+		                <input type="date" class="form-control" id="id_dateOfStudy" name="dateOfStudy" 
+		                value="{{ userprofile.dateOfStudy|date:'Y-m-d' }}" required />
+		            </div>
+		        </div>
+
+		        <div class="form-group row">
+		            <label class="col-form-label col-sm-2 font-weight-bold">Thời gian đào tạo</label>
+		            <div class="col-sm-4">
+		                <input type="text" class="form-control" id="id_timeOfStudy" name="timeOfStudy" value="{{ userprofile.timeOfStudy }}" required/>
+		            </div>
+
+		            <label class="col-form-label col-sm-2 font-weight-bold">Kỳ học</label>
+		            <div class="col-sm-4">
+		                <input type="text" class="form-control" id="id_infoOfStudy" name="infoOfStudy" value="{{ userprofile.infoOfStudy }}" required/>
+		            </div>
+		        </div>
+
+		        <hr/>
+				<h6 class="font-weight-normal text-center">KẾT QUẢ HỌC TẬP</h6>
+				<hr/>
+
+		        <div class="form-group row">
+		            <label class="col-form-label col-sm-2 font-weight-bold">Môn 1 (RU)</label>
+		            <div class="col-sm-3">
+		                <input type="text" class="form-control" id="id_ruSubject1" name="ruSubject1" value="{{ userprofile.ruSubject1 }}" 
+		                placeholder="Введение в профильную подготовку"/>
+		            </div>
+
+		            <label class="col-form-label col-sm-2 font-weight-bold">Môn 1 (VN)</label>
+		            <div class="col-sm-3">
+		                <input type="text" class="form-control" id="id_viSubject1" name="viSubject1" value="{{ userprofile.viSubject1 }}" 
+		                placeholder="Nhập môn kỹ thuật"/>
+		            </div>
+
+		            <label class="col-form-label col-sm-1 font-weight-bold">Điểm</label>
+		            <div class="col-sm-1">
+		                <select id="id_resultSubject1" name="resultSubject1" class="form-control">
+		                    {% for x, y in form.resultSubject1.field.choices %}
+		                        <option value={{ x }} {% if form.resultSubject1.value == x %} selected {% endif %}>{{ y }}</option>
+		                    {% endfor %}
+		                </select>
+		            </div>
+		        </div>
+
+		        <div class="form-group row">
+		            <label class="col-form-label col-sm-2 font-weight-bold">Môn 2 (RU)</label>
+		            <div class="col-sm-3">
+		                <input type="text" class="form-control" id="id_ruSubject2" name="ruSubject2" value="{{ userprofile.ruSubject2 }}"/>
+		            </div>
+
+		            <label class="col-form-label col-sm-2 font-weight-bold">Môn 2 (VN)</label>
+		            <div class="col-sm-3">
+		                <input type="text" class="form-control" id="id_viSubject2" name="viSubject2" value="{{ userprofile.viSubject2 }}"/>
+		            </div>
+
+		            <label class="col-form-label col-sm-1 font-weight-bold">Điểm</label>
+		            <div class="col-sm-1">
+		                <select id="id_resultSubject2" name="resultSubject2" class="form-control">
+		                    {% for x, y in form.resultSubject2.field.choices %}
+		                        <option value={{ x }} {% if form.resultSubject2.value == x %} selected {% endif %}>{{ y }}</option>
+		                    {% endfor %}
+		                </select>
+		            </div>
+		        </div>
+
+		        <div class="form-group row">
+		            <label class="col-form-label col-sm-2 font-weight-bold">Môn 3 (RU)</label>
+		            <div class="col-sm-3">
+		                <input type="text" class="form-control" id="id_ruSubject3" name="ruSubject3" value="{{ userprofile.ruSubject3 }}"/>
+		            </div>
+
+		            <label class="col-form-label col-sm-2 font-weight-bold">Môn 3 (VN)</label>
+		            <div class="col-sm-3">
+		                <input type="text" class="form-control" id="id_viSubject3" name="viSubject3" value="{{ userprofile.viSubject3 }}"/>
+		            </div>
+
+		            <label class="col-form-label col-sm-1 font-weight-bold">Điểm</label>
+		            <div class="col-sm-1">
+		                <select id="id_resultSubject3" name="resultSubject3" class="form-control">
+		                    {% for x, y in form.resultSubject3.field.choices %}
+		                        <option value={{ x }} {% if form.resultSubject3.value == x %} selected {% endif %}>{{ y }}</option>
+		                    {% endfor %}
+		                </select>
+		            </div>
+		        </div>
+
+		        <div class="form-group row">
+		            <label class="col-form-label col-sm-2 font-weight-bold">Môn 4 (RU)</label>
+		            <div class="col-sm-3">
+		                <input type="text" class="form-control" id="id_ruSubject4" name="ruSubject4" value="{{ userprofile.ruSubject4 }}"/>
+		            </div>
+
+		            <label class="col-form-label col-sm-2 font-weight-bold">Môn 4 (VN)</label>
+		            <div class="col-sm-3">
+		                <input type="text" class="form-control" id="id_viSubject4" name="viSubject4" value="{{ userprofile.viSubject4 }}"/>
+		            </div>
+
+		            <label class="col-form-label col-sm-1 font-weight-bold">Điểm</label>
+		            <div class="col-sm-1">
+		                <select id="id_resultSubject4" name="resultSubject4" class="form-control">
+		                    {% for x, y in form.resultSubject4.field.choices %}
+		                        <option value={{ x }} {% if form.resultSubject4.value == x %} selected {% endif %}>{{ y }}</option>
+		                    {% endfor %}
+		                </select>
+		            </div>
+		        </div>
+
+		        <div class="form-group row">
+		            <label class="col-form-label col-sm-2 font-weight-bold">Môn 5 (RU)</label>
+		            <div class="col-sm-3">
+		                <input type="text" class="form-control" id="id_ruSubject5" name="ruSubject5" value="{{ userprofile.ruSubject5 }}"/>
+		            </div>
+
+		            <label class="col-form-label col-sm-2 font-weight-bold">Môn 5 (VN)</label>
+		            <div class="col-sm-3">
+		                <input type="text" class="form-control" id="id_viSubject5" name="viSubject5" value="{{ userprofile.viSubject5 }}"/>
+		            </div>
+
+		            <label class="col-form-label col-sm-1 font-weight-bold">Điểm</label>
+		            <div class="col-sm-1">
+		                <select id="id_resultSubject5" name="resultSubject5" class="form-control">
+		                    {% for x, y in form.resultSubject5.field.choices %}
+		                        <option value={{ x }} {% if form.resultSubject5.value == x %} selected {% endif %}>{{ y }}</option>
+		                    {% endfor %}
+		                </select>
+		            </div>
+		        </div>
+
+		        <div class="form-group row">
+		            <label class="col-form-label col-sm-2 font-weight-bold">Môn 6 (RU)</label>
+		            <div class="col-sm-3">
+		                <input type="text" class="form-control" id="id_ruSubject6" name="ruSubject6" value="{{ userprofile.ruSubject6 }}"/>
+		            </div>
+
+		            <label class="col-form-label col-sm-2 font-weight-bold">Môn 6 (VN)</label>
+		            <div class="col-sm-3">
+		                <input type="text" class="form-control" id="id_viSubject6" name="viSubject6" value="{{ userprofile.viSubject6 }}"/>
+		            </div>
+
+		            <label class="col-form-label col-sm-1 font-weight-bold">Điểm</label>
+		            <div class="col-sm-1">
+		                <select id="id_resultSubject6" name="resultSubject6" class="form-control">
+		                    {% for x, y in form.resultSubject6.field.choices %}
+		                        <option value={{ x }} {% if form.resultSubject6.value == x %} selected {% endif %}>{{ y }}</option>
+		                    {% endfor %}
+		                </select>
+		            </div>
+		        </div>
+
+		        <div class="form-group row">
+		            <label class="col-form-label col-sm-2 font-weight-bold">Môn 7 (RU)</label>
+		            <div class="col-sm-3">
+		                <input type="text" class="form-control" id="id_ruSubject7" name="ruSubject7" value="{{ userprofile.ruSubject7 }}"/>
+		            </div>
+
+		            <label class="col-form-label col-sm-2 font-weight-bold">Môn 7 (VN)</label>
+		            <div class="col-sm-3">
+		                <input type="text" class="form-control" id="id_viSubject7" name="viSubject7" value="{{ userprofile.viSubject7 }}"/>
+		            </div>
+
+		            <label class="col-form-label col-sm-1 font-weight-bold">Điểm</label>
+		            <div class="col-sm-1">
+		                <select id="id_resultSubject7" name="resultSubject7" class="form-control">
+		                    {% for x, y in form.resultSubject7.field.choices %}
+		                        <option value={{ x }} {% if form.resultSubject7.value == x %} selected {% endif %}>{{ y }}</option>
+		                    {% endfor %}
+		                </select>
+		            </div>
+		        </div>
+
+		        <div class="form-group row">
+		            <label class="col-form-label col-sm-2 font-weight-bold">Môn 8 (RU)</label>
+		            <div class="col-sm-3">
+		                <input type="text" class="form-control" id="id_ruSubject8" name="ruSubject8" value="{{ userprofile.ruSubject8 }}"/>
+		            </div>
+
+		            <label class="col-form-label col-sm-2 font-weight-bold">Môn 8 (VN)</label>
+		            <div class="col-sm-3">
+		                <input type="text" class="form-control" id="id_viSubject8" name="viSubject8" value="{{ userprofile.viSubject8 }}"/>
+		            </div>
+
+		            <label class="col-form-label col-sm-1 font-weight-bold">Điểm</label>
+		            <div class="col-sm-1">
+		                <select id="id_resultSubject8" name="resultSubject8" class="form-control">
+		                    {% for x, y in form.resultSubject8.field.choices %}
+		                        <option value={{ x }} {% if form.resultSubject8.value == x %} selected {% endif %}>{{ y }}</option>
+		                    {% endfor %}
+		                </select>
+		            </div>
+		        </div>
+
+		        <div class="form-group row">
+		            <label class="col-form-label col-sm-2 font-weight-bold">Môn 9 (RU)</label>
+		            <div class="col-sm-3">
+		                <input type="text" class="form-control" id="id_ruSubject9" name="ruSubject9" value="{{ userprofile.ruSubject9 }}"/>
+		            </div>
+
+		            <label class="col-form-label col-sm-2 font-weight-bold">Môn 9 (VN)</label>
+		            <div class="col-sm-3">
+		                <input type="text" class="form-control" id="id_viSubject9" name="viSubject9" value="{{ userprofile.viSubject9 }}"/>
+		            </div>
+
+		            <label class="col-form-label col-sm-1 font-weight-bold">Điểm</label>
+		            <div class="col-sm-1">
+		                <select id="id_resultSubject9" name="resultSubject9" class="form-control">
+		                    {% for x, y in form.resultSubject9.field.choices %}
+		                        <option value={{ x }} {% if form.resultSubject9.value == x %} selected {% endif %}>{{ y }}</option>
+		                    {% endfor %}
+		                </select>
+		            </div>
+		        </div>
+
+		        <div class="form-group row">
+		            <label class="col-form-label col-sm-2 font-weight-bold">Môn 10 (RU)</label>
+		            <div class="col-sm-3">
+		                <input type="text" class="form-control" id="id_ruSubject10" name="ruSubject10" value="{{ userprofile.ruSubject10 }}"/>
+		            </div>
+
+		            <label class="col-form-label col-sm-2 font-weight-bold">Môn 10 (VN)</label>
+		            <div class="col-sm-3">
+		                <input type="text" class="form-control" id="id_viSubject10" name="viSubject10" value="{{ userprofile.viSubject10 }}"/>
+		            </div>
+
+		            <label class="col-form-label col-sm-1 font-weight-bold">Điểm</label>
+		            <div class="col-sm-1">
+		                <select id="id_resultSubject10" name="resultSubject10" class="form-control">
+		                    {% for x, y in form.resultSubject10.field.choices %}
+		                        <option value={{ x }} {% if form.resultSubject10.value == x %} selected {% endif %}>{{ y }}</option>
+		                    {% endfor %}
+		                </select>
+		            </div>
+		        </div>
+
+		        <div class="form-group row">
+		            <label class="col-form-label col-sm-2 font-weight-bold">Môn 11 (RU)</label>
+		            <div class="col-sm-3">
+		                <input type="text" class="form-control" id="id_ruSubject11" name="ruSubject11" value="{{ userprofile.ruSubject11 }}"/>
+		            </div>
+
+		            <label class="col-form-label col-sm-2 font-weight-bold">Môn 11 (VN)</label>
+		            <div class="col-sm-3">
+		                <input type="text" class="form-control" id="id_viSubject11" name="viSubject11" value="{{ userprofile.viSubject11 }}"/>
+		            </div>
+
+		            <label class="col-form-label col-sm-1 font-weight-bold">Điểm</label>
+		            <div class="col-sm-1">
+		                <select id="id_resultSubject11" name="resultSubject11" class="form-control">
+		                    {% for x, y in form.resultSubject11.field.choices %}
+		                        <option value={{ x }} {% if form.resultSubject11.value == x %} selected {% endif %}>{{ y }}</option>
+		                    {% endfor %}
+		                </select>
+		            </div>
+		        </div>
+
+		        <div class="form-group row">
+		            <label class="col-form-label col-sm-2 font-weight-bold">Môn 12 (RU)</label>
+		            <div class="col-sm-3">
+		                <input type="text" class="form-control" id="id_ruSubject12" name="ruSubject12" value="{{ userprofile.ruSubject12 }}"/>
+		            </div>
+
+		            <label class="col-form-label col-sm-2 font-weight-bold">Môn 12 (VN)</label>
+		            <div class="col-sm-3">
+		                <input type="text" class="form-control" id="id_viSubject12" name="viSubject12" value="{{ userprofile.viSubject12 }}"/>
+		            </div>
+
+		            <label class="col-form-label col-sm-1 font-weight-bold">Điểm</label>
+		            <div class="col-sm-1">
+		                <select id="id_resultSubject12" name="resultSubject12" class="form-control">
+		                    {% for x, y in form.resultSubject12.field.choices %}
+		                        <option value={{ x }} {% if form.resultSubject12.value == x %} selected {% endif %}>{{ y }}</option>
+		                    {% endfor %}
+		                </select>
+		            </div>
+		        </div>
+
+		        <hr/>
+				<h6 class="font-weight-normal text-center">THÔNG TIN NGÂN HÀNG</h6>
+				<hr/>
+
+		        <div class="form-group row">
+		            <label class="col-form-label col-sm-2 font-weight-bold">Tên ngân hàng</label>
+		            <div class="col-sm-4">
+		                <input type="text" class="form-control" id="id_nameBank" name="nameBank" value="{{ userprofile.nameBank }}"/>
+		            </div>
+
+		            <label class="col-form-label col-sm-2 font-weight-bold">Tên tài khoản</label>
+		            <div class="col-sm-4">
+		                <input type="text" class="form-control" id="id_nameAccount" name="nameAccount" value="{{ userprofile.nameAccount }}"/>
 		            </div>
 		        </div>
 
 		        <hr/>
 
 				<div class="text-left">
-		            <input class="btn btn-primary btn-sm" type="submit" name="submit" value="Update" />
-		            <a class="btn btn-primary btn-sm" href="{% url 'report_document' %}">Report</a>
+		            <input class="btn btn-primary btn-sm" type="submit" name="submit" value="Cập Nhật" />
+		            <a class="btn btn-primary btn-sm" href="{% url 'report_document' %}">In Báo cáo</a>
+		            <a class="btn btn-primary btn-sm" href="{% url 'grade_document' %}">In Bảng điểm</a>
 		        </div>
 			</form>
 		{% endif %}

@@ -33,7 +33,65 @@ class UserProfile(models.Model):
 	studyYear = models.IntegerField(blank=False)
 	addressVN = models.CharField(max_length=128, blank=False)
 	addressRu = models.CharField(max_length=128, blank=False)
-	phone = models.IntegerField(blank=False)
+	phone = models.CharField(max_length=128, blank=False)
+	workPlace = models.CharField(max_length=128, blank=True)
+	dateOfAdmission = models.DateField(blank=False)  # Ngay nhap hoc
+	dateOfStudy = models.DateField(blank=False)  # Ngay bat dau khoa hoc
+	timeOfStudy = models.CharField(max_length=128, blank=False)  # Thoi gian dao tao
+	infoOfStudy = models.CharField(max_length=128, blank=False)  # Dang hoc hoc ki ?
+
+	# Result of study
+	ruSubject1 = models.CharField(max_length=128, blank=True)
+	viSubject1 = models.CharField(max_length=128, blank=True)
+	resultSubject1 = models.CharField(max_length=20, blank=True)
+
+	ruSubject2 = models.CharField(max_length=128, blank=True)
+	viSubject2 = models.CharField(max_length=128, blank=True)
+	resultSubject2 = models.CharField(max_length=20, blank=True)
+
+	ruSubject3 = models.CharField(max_length=128, blank=True)
+	viSubject3 = models.CharField(max_length=128, blank=True)
+	resultSubject3 = models.CharField(max_length=20, blank=True)
+
+	ruSubject4 = models.CharField(max_length=128, blank=True)
+	viSubject4 = models.CharField(max_length=128, blank=True)
+	resultSubject4 = models.CharField(max_length=20, blank=True)
+
+	ruSubject5 = models.CharField(max_length=128, blank=True)
+	viSubject5 = models.CharField(max_length=128, blank=True)
+	resultSubject5 = models.CharField(max_length=20, blank=True)
+
+	ruSubject6 = models.CharField(max_length=128, blank=True)
+	viSubject6 = models.CharField(max_length=128, blank=True)
+	resultSubject6 = models.CharField(max_length=20, blank=True)
+
+	ruSubject7 = models.CharField(max_length=128, blank=True)
+	viSubject7 = models.CharField(max_length=128, blank=True)
+	resultSubject7 = models.CharField(max_length=20, blank=True)
+
+	ruSubject8 = models.CharField(max_length=128, blank=True)
+	viSubject8 = models.CharField(max_length=128, blank=True)
+	resultSubject8 = models.CharField(max_length=20, blank=True)
+
+	ruSubject9 = models.CharField(max_length=128, blank=True)
+	viSubject9 = models.CharField(max_length=128, blank=True)
+	resultSubject9 = models.CharField(max_length=20, blank=True)
+
+	ruSubject10 = models.CharField(max_length=128, blank=True)
+	viSubject10 = models.CharField(max_length=128, blank=True)
+	resultSubject10 = models.CharField(max_length=20, blank=True)
+
+	ruSubject11 = models.CharField(max_length=128, blank=True)
+	viSubject11 = models.CharField(max_length=128, blank=True)
+	resultSubject11 = models.CharField(max_length=20, blank=True)
+
+	ruSubject12 = models.CharField(max_length=128, blank=True)
+	viSubject12 = models.CharField(max_length=128, blank=True)
+	resultSubject12 = models.CharField(max_length=20, blank=True)
+
+	# Information of Bank
+	nameBank = models.CharField(max_length=128, blank=True)
+	nameAccount = models.CharField(max_length=128, blank=True)  # Ten tai khoan tieng Nga
 
 
 	def __str__(self):
