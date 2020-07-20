@@ -23,6 +23,10 @@
 	<body>
 		<div class="container">
 			{% block body_block %}
+				<hr/>
+			    <h3 class="font-weight-normal">Please Sign In</h3>
+			    <hr/>
+
 				<form class="form-signin" role="form" method="post" action=".">
 					{% csrf_token %}
 
