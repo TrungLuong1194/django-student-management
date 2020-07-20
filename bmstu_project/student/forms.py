@@ -17,15 +17,15 @@ class MajorForm(forms.ModelForm):
 class UserProfileForm(forms.ModelForm):
 
 	GENDER_CHOICES = ( 
-		("Nam", "Male"),
-		("Nữ", "Female"),
+		("Nam", "Nam"),
+		("Nữ", "Nữ"),
 	)
 
 	GRADE_CHOICES = (
-		("Giỏi", "Отлично"),
-		("Khá", "Хорошо"),
-		("TrungBình", "Удовлетворительно"),
-		("Đạt", "Зачтено")
+		("Отлично", "Отлично"),
+		("Хорошо", "Хорошо"),
+		("Удовлетворительно", "Удовлетворительно"),
+		("Зачтено", "Зачтено")
 	)
 
 	major = forms.ModelChoiceField(queryset=Major.objects.all())
