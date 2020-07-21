@@ -1,4 +1,4 @@
-{% extends "student/base.html" %}
+{% extends 'student/base.html' %}
 {% load static %}
 
 {% block title %}
@@ -6,9 +6,7 @@
 {% endblock %}
 
 {% block body_block %}
-	<hr/>
-    <h3 class="font-weight-normal">Sign Up</h3>
-    <hr/>
+    <h3 class="mb-4">Sign Up</h3>
 
     <form id="register_form" method="post" action=".">
         {% csrf_token %}
