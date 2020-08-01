@@ -10,9 +10,9 @@ from docx import *
 from io import BytesIO
 from datetime import date
 from docx.shared import Pt
-from docx.enum.text import WD_ALIGN_PARAGRAPH
+from docx.enum.text import WD_ALIGN_PARAGRAPH, WD_LINE_SPACING
 from docx.enum.table import WD_TABLE_ALIGNMENT
-from docx.shared import Cm, Inches
+from docx.shared import Cm, Inches, Mm
 
 
 def index(request):
@@ -169,25 +169,38 @@ def report_document(request):
         user_current = UserProfile.objects.get(user=request.user.id)
 
     document = Document()
-    docx_title='Bao cao hoc tap.docx'
+    docx_title='BCHT_BGD.docx'
 
     # Setting document
     style = document.styles['Normal']
     font = style.font
     font.name = 'Times New Roman'
-    font.size = Pt(13)
+    font.size = Pt(14)
+
+    section = document.sections[0]
+    section.page_height = Mm(297)
+    section.page_width = Mm(210)
+    section.top_margin = Inches(0.70)
+    section.bottom_margin = Inches(0.70)
+    section.left_margin = Inches(1.00)
+    section.right_margin = Inches(1.00)
 
     # Content
     paragraph1 = document.add_paragraph()
     paragraph1.alignment = WD_ALIGN_PARAGRAPH.CENTER
+    paragraph1.paragraph_format.line_spacing_rule = WD_LINE_SPACING.SINGLE
     paragraph1.add_run('CỘNG HÒA XÃ HỘI CHỦ NGHĨA VIỆT NAM').bold = True
-    paragraph1.add_run('\nĐộc lập - Tự do - Hạnh phúc').bold = True
+    run = paragraph1.add_run('\nĐộc lập - Tự do - Hạnh phúc')
+    run.font.bold = True
+    run.font.underline = True
     paragraph1.add_run('\n\nBÁO CÁO TIẾN ĐỘ HỌC TẬP').bold = True
-    paragraph1.add_run('\n(từ ngày  tháng  năm 20   đến ngày  tháng  năm 20  )')
-    paragraph1.add_run('\n\nKính gửi: Bộ Giáo dục và Đào tạo')
+    paragraph1.add_run('\n(từ ngày  tháng  năm 20  đến ngày  tháng  năm 20  )')
+    paragraph1.add_run('\n\nKính gửi: ')
+    paragraph1.add_run('- Bộ Giáo dục và Đào tạo').bold = True
 
     paragraph2 = document.add_paragraph()
     paragraph2.alignment = WD_ALIGN_PARAGRAPH.LEFT
+    paragraph2.paragraph_format.line_spacing_rule = WD_LINE_SPACING.SINGLE
 
     paragraph2.add_run('1. Họ và tên: ')
     paragraph2.add_run(user_current.fullName).bold = True
@@ -195,7 +208,7 @@ def report_document(request):
     paragraph2.add_run(user_current.gender).bold = True
 
     paragraph2.add_run('\n2. Ngày sinh: ')
-    paragraph2.add_run(user_current.birthday.strftime('%d/%m/%Y')).bold = True
+    paragraph2.add_run(user_current.birthday.strftime('%d.%m.%Y')).bold = True
 
     paragraph2.add_run('\n3. Dân tộc: ')
     paragraph2.add_run(user_current.ethnic).bold = True
@@ -222,14 +235,13 @@ def report_document(request):
     paragraph2.add_run(' (' + user_current.major.enName + ')').bold = True
 
     paragraph2.add_run('\n9. Tên và địa chỉ trường học ở nước ngoài (ghi tiếng Việt và tiếng Anh): ')
-    paragraph2.add_run('Đại học Kỹ thuật Quốc gia Mát-xcơ-va mang tên N.E. Bauman - Bauman Moscow State Technical University\n\
-Địa chỉ: số 5, đường Baumanskaya-2, Mát-xcơ-va, 105005').bold = True
+    paragraph2.add_run('\n    Trường Đại Học Kỹ Thuật Tổng Hợp Bauman\n    (Bauman Moscow State Technical University)').bold = True
 
     paragraph2.add_run('\n10. Ngày đến trường nhập học: ')
-    paragraph2.add_run(user_current.dateOfAdmission.strftime('%d/%m/%Y')).bold = True
+    paragraph2.add_run(user_current.dateOfAdmission.strftime('%d.%m.%Y')).bold = True
 
     paragraph2.add_run('\n11. Ngày bắt đầu khóa học (theo thông báo của trường): ')
-    paragraph2.add_run(user_current.dateOfStudy.strftime('%d/%m/%Y')).bold = True
+    paragraph2.add_run(user_current.dateOfStudy.strftime('%d.%m.%Y')).bold = True
 
     paragraph2.add_run('\n12. Thời gian đào tạo (theo thông báo của trường): ')
     paragraph2.add_run(user_current.timeOfStudy).bold = True
@@ -253,79 +265,78 @@ def report_document(request):
         "Зачтено": "Đạt"
     }
 
-    paragraph2.add_run('\n17. Kết quả học tập:\n')
+    paragraph2.add_run('\n17. Kết quả học tập:')
+
+    table1 = document.add_table(rows=1, cols=2)
+    table1.columns[0].width=Inches(4.3)
+    table1.columns[1].width=Inches(2)
+    row = table1.rows[0]
+
     if user_current.ruSubject1:
-        paragraph2.add_run('- ' + user_current.ruSubject1).bold = True
-        paragraph2.add_run(' (' + user_current.viSubject1 + '):').bold = True
-        paragraph2.add_run('\n  ' + user_current.resultSubject1 + ' (' + GRADE_CHOICES[user_current.resultSubject1] + ')')
+        row.cells[0].paragraphs[0].add_run('- ' + user_current.viSubject1 + ':').bold = True
+        row.cells[1].paragraphs[0].add_run(user_current.resultSubject1 + ' (' + GRADE_CHOICES[user_current.resultSubject1] + ')').bold = True
 
     if user_current.ruSubject2:
-        paragraph2.add_run('\n- ' + user_current.ruSubject2).bold = True
-        paragraph2.add_run(' (' + user_current.viSubject2 + '):').bold = True
-        paragraph2.add_run('\n  ' + user_current.resultSubject2 + ' (' + GRADE_CHOICES[user_current.resultSubject2] + ')')
+        row.cells[0].paragraphs[0].add_run('\n- ' + user_current.viSubject2 + ':').bold = True
+        row.cells[1].paragraphs[0].add_run('\n' + user_current.resultSubject2 + ' (' + GRADE_CHOICES[user_current.resultSubject2] + ')').bold = True
 
     if user_current.ruSubject3:
-        paragraph2.add_run('\n- ' + user_current.ruSubject3).bold = True
-        paragraph2.add_run(' (' + user_current.viSubject3 + '):').bold = True
-        paragraph2.add_run('\n  ' + user_current.resultSubject3 + ' (' + GRADE_CHOICES[user_current.resultSubject3] + ')')
+        row.cells[0].paragraphs[0].add_run('\n- ' + user_current.viSubject3 + ':').bold = True
+        row.cells[1].paragraphs[0].add_run('\n' + user_current.resultSubject3 + ' (' + GRADE_CHOICES[user_current.resultSubject3] + ')').bold = True
 
     if user_current.ruSubject4:
-        paragraph2.add_run('\n- ' + user_current.ruSubject4).bold = True
-        paragraph2.add_run(' (' + user_current.viSubject4 + '):').bold = True
-        paragraph2.add_run('\n  ' + user_current.resultSubject4 + ' (' + GRADE_CHOICES[user_current.resultSubject4] + ')')
+        row.cells[0].paragraphs[0].add_run('\n- ' + user_current.viSubject4 + ':').bold = True
+        row.cells[1].paragraphs[0].add_run('\n' + user_current.resultSubject4 + ' (' + GRADE_CHOICES[user_current.resultSubject4] + ')').bold = True
 
     if user_current.ruSubject5:
-        paragraph2.add_run('\n- ' + user_current.ruSubject5).bold = True
-        paragraph2.add_run(' (' + user_current.viSubject5 + '):').bold = True
-        paragraph2.add_run('\n  ' + user_current.resultSubject5 + ' (' + GRADE_CHOICES[user_current.resultSubject5] + ')')
+        row.cells[0].paragraphs[0].add_run('\n- ' + user_current.viSubject5 + ':').bold = True
+        row.cells[1].paragraphs[0].add_run('\n' + user_current.resultSubject5 + ' (' + GRADE_CHOICES[user_current.resultSubject5] + ')').bold = True
 
     if user_current.ruSubject6:
-        paragraph2.add_run('\n- ' + user_current.ruSubject6).bold = True
-        paragraph2.add_run(' (' + user_current.viSubject6 + '):').bold = True
-        paragraph2.add_run('\n  ' + user_current.resultSubject6 + ' (' + GRADE_CHOICES[user_current.resultSubject6] + ')')
+        row.cells[0].paragraphs[0].add_run('\n- ' + user_current.viSubject6 + ':').bold = True
+        row.cells[1].paragraphs[0].add_run('\n' + user_current.resultSubject6 + ' (' + GRADE_CHOICES[user_current.resultSubject6] + ')').bold = True
 
     if user_current.ruSubject7:
-        paragraph2.add_run('\n- ' + user_current.ruSubject7).bold = True
-        paragraph2.add_run(' (' + user_current.viSubject7 + '):').bold = True
-        paragraph2.add_run('\n  ' + user_current.resultSubject7 + ' (' + GRADE_CHOICES[user_current.resultSubject7] + ')')
+        row.cells[0].paragraphs[0].add_run('\n- ' + user_current.viSubject7 + ':').bold = True
+        row.cells[1].paragraphs[0].add_run('\n' + user_current.resultSubject7 + ' (' + GRADE_CHOICES[user_current.resultSubject7] + ')').bold = True
 
     if user_current.ruSubject8:
-        paragraph2.add_run('\n- ' + user_current.ruSubject8).bold = True
-        paragraph2.add_run(' (' + user_current.viSubject8 + '):').bold = True
-        paragraph2.add_run('\n  ' + user_current.resultSubject8 + ' (' + GRADE_CHOICES[user_current.resultSubject8] + ')')
+        row.cells[0].paragraphs[0].add_run('\n- ' + user_current.viSubject8 + ':').bold = True
+        row.cells[1].paragraphs[0].add_run('\n' + user_current.resultSubject8 + ' (' + GRADE_CHOICES[user_current.resultSubject8] + ')').bold = True
 
     if user_current.ruSubject9:
-        paragraph2.add_run('\n- ' + user_current.ruSubject9).bold = True
-        paragraph2.add_run(' (' + user_current.viSubject9 + '):').bold = True
-        paragraph2.add_run('\n  ' + user_current.resultSubject9 + ' (' + GRADE_CHOICES[user_current.resultSubject9] + ')')
+        row.cells[0].paragraphs[0].add_run('\n- ' + user_current.viSubject9 + ':').bold = True
+        row.cells[1].paragraphs[0].add_run('\n' + user_current.resultSubject9 + ' (' + GRADE_CHOICES[user_current.resultSubject9] + ')').bold = True
 
     if user_current.ruSubject10:
-        paragraph2.add_run('\n- ' + user_current.ruSubject10).bold = True
-        paragraph2.add_run(' (' + user_current.viSubject10 + '):').bold = True
-        paragraph2.add_run('\n  ' + user_current.resultSubject10 + ' (' + GRADE_CHOICES[user_current.resultSubject10] + ')')
+        row.cells[0].paragraphs[0].add_run('\n- ' + user_current.viSubject10 + ':').bold = True
+        row.cells[1].paragraphs[0].add_run('\n' + user_current.resultSubject10 + ' (' + GRADE_CHOICES[user_current.resultSubject10] + ')').bold = True
 
     if user_current.ruSubject11:
-        paragraph2.add_run('\n- ' + user_current.ruSubject11).bold = True
-        paragraph2.add_run(' (' + user_current.viSubject11 + '):').bold = True
-        paragraph2.add_run('\n  ' + user_current.resultSubject11 + ' (' + GRADE_CHOICES[user_current.resultSubject11] + ')')
+        row.cells[0].paragraphs[0].add_run('\n- ' + user_current.viSubject11 + ':').bold = True
+        row.cells[1].paragraphs[0].add_run('\n' + user_current.resultSubject11 + ' (' + GRADE_CHOICES[user_current.resultSubject11] + ')').bold = True
 
     if user_current.ruSubject12:
-        paragraph2.add_run('\n- ' + user_current.ruSubject12).bold = True
-        paragraph2.add_run(' (' + user_current.viSubject12 + '):').bold = True
-        paragraph2.add_run('\n  ' + user_current.resultSubject12 + ' (' + GRADE_CHOICES[user_current.resultSubject12] + ')')
+        row.cells[0].paragraphs[0].add_run('\n- ' + user_current.viSubject12 + ':').bold = True
+        row.cells[1].paragraphs[0].add_run('\n' + user_current.resultSubject12 + ' (' + GRADE_CHOICES[user_current.resultSubject12] + ')').bold = True
+    
+    paragraph3 = document.add_paragraph()
+    paragraph3.alignment = WD_ALIGN_PARAGRAPH.LEFT
+    paragraph3.paragraph_format.line_spacing_rule = WD_LINE_SPACING.SINGLE
 
-    paragraph2.add_run('\n18. Họ tên người hướng dẫn (supervisor) hoặc người tư vấn (adviser):.....')
-    paragraph2.add_run('\nĐịa chỉ e-mail của người hướng dẫn/tư vấn:.....')
+    paragraph3.add_run('18. Họ tên người hướng dẫn (supervisor) hoặc người tư vấn (adviser): ')
+    paragraph3.add_run('Chưa có').bold = True
+    paragraph3.add_run('\nĐịa chỉ e-mail của người hướng dẫn/tư vấn: ')
+    paragraph3.add_run('Chưa có').bold = True
 
-    paragraph2.add_run('\n19. Kiến nghị, đề xuất (nếu có):.....')
+    paragraph3.add_run('\n19. Kiến nghị, đề xuất (nếu có):')
 
-    paragraph2.add_run('\n20. Đề nghị cấp học phí, sinh hoạt phí (đối với lưu học sinh học bổng):')
-    paragraph2.add_run('\nĐã nhận sinh hoạt phí đến hết tháng  năm 20  ')
-    paragraph2.add_run('\nHọc kỳ cuối cùng xin được chuyển sinh hoạt phí đến hết tháng  năm 20  , tổng số 6 tháng.')
-    paragraph2.add_run('\nCập nhật số tài khoản cá nhân đã đăng ký:')
+    paragraph3.add_run('\n20. Đề nghị cấp học phí, sinh hoạt phí (đối với lưu học sinh học bổng):')
+    paragraph3.add_run('\nĐã nhận sinh hoạt phí đến hết tháng  năm 20  ')
+    paragraph3.add_run('\nCập nhật số tài khoản cá nhân đã đăng ký:')
 
-    table1 = document.add_table(rows=1, cols=3, style='Table Grid')
-    row = table1.rows[0]
+    table2 = document.add_table(rows=1, cols=3, style='Table Grid')
+    row = table2.rows[0]
 
     row.cells[0].paragraphs[0].add_run('- Tên ngân hàng:\n')
     row.cells[0].paragraphs[0].add_run(user_current.nameBank).bold = True
@@ -345,16 +356,19 @@ def report_document(request):
 
     document.add_paragraph()
 
-    table2 = document.add_table(rows=1, cols=2)
-    row = table2.rows[0]
+    table3 = document.add_table(rows=1, cols=2)
+    row = table3.rows[0]
 
     row.cells[0].paragraphs[0].alignment = WD_ALIGN_PARAGRAPH.CENTER
-    row.cells[0].paragraphs[0].add_run('Xác nhận của đơn vị\nĐơn vị trưởng').bold = True
+    row.cells[0].paragraphs[0].paragraph_format.line_spacing_rule = WD_LINE_SPACING.SINGLE
+    row.cells[0].paragraphs[0].add_run('Xác nhận của đơn vị\nĐƠN VỊ TRƯỞNG').bold = True
+    row.cells[0].paragraphs[0].add_run('\n\n\n\n\n\nPhạm Xuân Trường').bold = True
 
     row.cells[1].paragraphs[0].alignment = WD_ALIGN_PARAGRAPH.CENTER
+    row.cells[1].paragraphs[0].paragraph_format.line_spacing_rule = WD_LINE_SPACING.SINGLE
     row.cells[1].paragraphs[0].add_run('Mát-xcơ-va, ngày  tháng  năm 20  ')
     row.cells[1].paragraphs[0].add_run('\nNgười báo cáo').bold = True
-    row.cells[1].paragraphs[0].add_run('\n\n\n\n\n' + user_current.fullName).bold = True
+    row.cells[1].paragraphs[0].add_run('\n\n\n\n\n\n' + user_current.fullName).bold = True
 
     # Prepare document for download        
     f = BytesIO()
@@ -383,15 +397,24 @@ def grade_document(request):
     style = document.styles['Normal']
     font = style.font
     font.name = 'Times New Roman'
-    font.size = Pt(11)
+    font.size = Pt(12)
+
+    section = document.sections[0]
+    section.page_height = Mm(297)
+    section.page_width = Mm(210)
+    section.top_margin = Inches(0.70)
+    section.bottom_margin = Inches(0.70)
+    section.left_margin = Inches(1.00)
+    section.right_margin = Inches(1.00)
 
     # Content
     table1 = document.add_table(rows=1, cols=2)
-    table1.columns[0].width=Inches(4)
+    table1.columns[0].width=Inches(4.3)
     table1.columns[1].width=Inches(2)
     row = table1.rows[0]
 
     row.cells[0].paragraphs[0].alignment = WD_ALIGN_PARAGRAPH.CENTER
+    row.cells[0].paragraphs[0].paragraph_format.line_spacing_rule = WD_LINE_SPACING.SINGLE
     row.cells[0].paragraphs[0].add_run('BỘ GIÁO DỤC VÀ KHOA HỌC')
     row.cells[0].paragraphs[0].add_run('\nLIÊN BANG NGA')
     row.cells[0].paragraphs[0].add_run('\nCục Chính sách Nhà nước trong Giáo dục Đại học')
@@ -407,17 +430,20 @@ def grade_document(request):
 
     paragraph1 = document.add_paragraph()
     paragraph1.alignment = WD_ALIGN_PARAGRAPH.CENTER
+    paragraph1.paragraph_format.line_spacing_rule = WD_LINE_SPACING.SINGLE
 
     paragraph1.add_run('\nCHỨNG NHẬN').bold = True
     paragraph1.add_run('\nVề kết quả học tập').bold = True
 
     paragraph2 = document.add_paragraph()
     paragraph2.alignment = WD_ALIGN_PARAGRAPH.JUSTIFY
+    paragraph2.paragraph_format.line_spacing_rule = WD_LINE_SPACING.SINGLE
     paragraph2.add_run('\n\tCấp cho sinh viên lớp ... ' + user_current.fullName + ', ngày sinh ' + user_current.birthday.strftime('%d.%m.%Y') +\
         ', đang học năm ... tại trường THKT mang tên Bauman về kết quả học tập: Không có môn học bị nợ, tham dự tất các các tiết học đều đặn.')
 
     paragraph3 = document.add_paragraph()
     paragraph3.alignment = WD_ALIGN_PARAGRAPH.LEFT
+    paragraph3.paragraph_format.line_spacing_rule = WD_LINE_SPACING.SINGLE
     paragraph3.add_run('Kết quả học tập kì học thứ ...:\n').bold = True
 
     GRADE_CHOICES = {
@@ -428,82 +454,76 @@ def grade_document(request):
     }
     
     if user_current.ruSubject1:
-        paragraph3.add_run('- ' + user_current.ruSubject1)
-        paragraph3.add_run(' (' + user_current.viSubject1 + '): ')
+        paragraph3.add_run('- ' + user_current.viSubject1 + ': ')
         paragraph3.add_run(user_current.resultSubject1 + ' (' + GRADE_CHOICES[user_current.resultSubject1] + ')').bold = True
 
     if user_current.ruSubject2:
-        paragraph3.add_run('\n- ' + user_current.ruSubject2)
-        paragraph3.add_run(' (' + user_current.viSubject2 + '): ')
+        paragraph3.add_run('\n- ' + user_current.viSubject2 + ': ')
         paragraph3.add_run(user_current.resultSubject2 + ' (' + GRADE_CHOICES[user_current.resultSubject2] + ')').bold = True
 
     if user_current.ruSubject3:
-        paragraph3.add_run('\n- ' + user_current.ruSubject3)
-        paragraph3.add_run(' (' + user_current.viSubject3 + '): ')
+        paragraph3.add_run('\n- ' + user_current.viSubject3 + ': ')
         paragraph3.add_run(user_current.resultSubject3 + ' (' + GRADE_CHOICES[user_current.resultSubject3] + ')').bold = True
 
     if user_current.ruSubject4:
-        paragraph3.add_run('\n- ' + user_current.ruSubject4)
-        paragraph3.add_run(' (' + user_current.viSubject4 + '): ')
+        paragraph3.add_run('\n- ' + user_current.viSubject4 + ': ')
         paragraph3.add_run(user_current.resultSubject4 + ' (' + GRADE_CHOICES[user_current.resultSubject4] + ')').bold = True
 
     if user_current.ruSubject5:
-        paragraph3.add_run('\n- ' + user_current.ruSubject5)
-        paragraph3.add_run(' (' + user_current.viSubject5 + '): ')
+        paragraph3.add_run('\n- ' + user_current.viSubject5 + ': ')
         paragraph3.add_run(user_current.resultSubject5 + ' (' + GRADE_CHOICES[user_current.resultSubject5] + ')').bold = True
 
     if user_current.ruSubject6:
-        paragraph3.add_run('\n- ' + user_current.ruSubject6)
-        paragraph3.add_run(' (' + user_current.viSubject6 + '): ')
+        paragraph3.add_run('\n- ' + user_current.viSubject6 + ': ')
         paragraph3.add_run(user_current.resultSubject6 + ' (' + GRADE_CHOICES[user_current.resultSubject6] + ')').bold = True
 
     if user_current.ruSubject7:
-        paragraph3.add_run('\n- ' + user_current.ruSubject7)
-        paragraph3.add_run(' (' + user_current.viSubject7 + '): ')
+        paragraph3.add_run('\n- ' + user_current.viSubject7 + ': ')
         paragraph3.add_run(user_current.resultSubject7 + ' (' + GRADE_CHOICES[user_current.resultSubject7] + ')').bold = True
 
     if user_current.ruSubject8:
-        paragraph3.add_run('\n- ' + user_current.ruSubject8)
-        paragraph3.add_run(' (' + user_current.viSubject8 + '): ')
+        paragraph3.add_run('\n- ' + user_current.viSubject8 + ': ')
         paragraph3.add_run(user_current.resultSubject8 + ' (' + GRADE_CHOICES[user_current.resultSubject8] + ')').bold = True
 
     if user_current.ruSubject9:
-        paragraph3.add_run('\n- ' + user_current.ruSubject9)
-        paragraph3.add_run(' (' + user_current.viSubject9 + '): ')
+        paragraph3.add_run('\n- ' + user_current.viSubject9 + ': ')
         paragraph3.add_run(user_current.resultSubject9 + ' (' + GRADE_CHOICES[user_current.resultSubject9] + ')').bold = True
 
     if user_current.ruSubject10:
-        paragraph3.add_run('\n- ' + user_current.ruSubject10)
-        paragraph3.add_run(' (' + user_current.viSubject10 + '): ')
+        paragraph3.add_run('\n- ' + user_current.viSubject10 + ': ')
         paragraph3.add_run(user_current.resultSubject10 + ' (' + GRADE_CHOICES[user_current.resultSubject10] + ')').bold = True
 
     if user_current.ruSubject11:
-        paragraph3.add_run('\n- ' + user_current.ruSubject11)
-        paragraph3.add_run(' (' + user_current.viSubject11 + '): ')
+        paragraph3.add_run('\n- ' + user_current.viSubject11 + ': ')
         paragraph3.add_run(user_current.resultSubject11 + ' (' + GRADE_CHOICES[user_current.resultSubject11] + ')').bold = True
 
     if user_current.ruSubject12:
-        paragraph3.add_run('\n- ' + user_current.ruSubject12)
-        paragraph3.add_run(' (' + user_current.viSubject12 + '): ')
+        paragraph3.add_run('\n- ' + user_current.viSubject12 + ': ')
         paragraph3.add_run(user_current.resultSubject12 + ' (' + GRADE_CHOICES[user_current.resultSubject12] + ')').bold = True
 
     paragraph3.add_run('\n\nMột đơn vị học trình gồm ... giờ.')
 
     table2 = document.add_table(rows=1, cols=2)
+    table2.columns[0].width=Inches(2.8)
+    table2.columns[1].width=Inches(3.5)
     row = table2.rows[0]
 
     row.cells[0].paragraphs[0].alignment = WD_ALIGN_PARAGRAPH.CENTER
+    row.cells[0].paragraphs[0].paragraph_format.line_spacing_rule = WD_LINE_SPACING.SINGLE
     row.cells[0].paragraphs[0].add_run('Trưởng khoa\n\nChernhikov A.C.\n(Đã kí và đóng dấu)')
 
     table3 = document.add_table(rows=1, cols=2)
+    table3.columns[0].width=Inches(2.8)
+    table3.columns[1].width=Inches(3.5)
     row = table3.rows[0]
 
     row.cells[1].paragraphs[0].alignment = WD_ALIGN_PARAGRAPH.CENTER
+    row.cells[1].paragraphs[0].paragraph_format.line_spacing_rule = WD_LINE_SPACING.SINGLE
     row.cells[1].paragraphs[0].add_run('Tôi xin cam đoan dịch đúng so với bản gốc.').bold = True
     row.cells[1].paragraphs[0].add_run('\nMát-xcơ-va, ngày  tháng  năm 20  ')
     row.cells[1].paragraphs[0].add_run('\nNGƯỜI DỊCH')
     row.cells[1].paragraphs[0].add_run('\n(ký và ghi rõ họ tên)')
-    row.cells[1].paragraphs[0].add_run('\n\n\n\n' + user_current.fullName).bold = True
+    row.cells[1].paragraphs[0].add_run('\n\n\n\n\n' + user_current.fullName).bold = True
 
     # Prepare document for download        
     f = BytesIO()
