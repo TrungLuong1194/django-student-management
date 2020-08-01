@@ -6,22 +6,20 @@
 {% endblock %}
 
 {% block body_block %}
-	<hr/>
-
 	{% if user.is_authenticated %}
-		<h2>Hello {{ user.username }}!</h1>
+		<h1>Hello {{ user.username }}!</h1>
 	{% else %}
 		<h1>Hello anonymous! </h1>
 	{% endif %}
 
 	<hr/>
 
-	<h5>Trang web nhằm mục đích giúp các bạn sinh viên tạo file Báo cáo học tập và Bản dịch bảng điểm dưới dạng Word.</h5>
-	<h5>Hướng dẫn sử dụng:</h5>
+	<p class="lead">Trang web nhằm mục đích giúp các bạn sinh viên tạo file Báo cáo học tập và Bản dịch bảng điểm dưới dạng Word.</p>
+	<p class="lead">Hướng dẫn sử dụng:</p>
 	<p>- Bước 1: Đăng ký tài khoản: Nhấn phím "Sign Up".</p>
 	<p>- Bước 2: Đăng nhập bằng tài khoản đã đăng ký: Nhấn phím "Login".</p>
 	<p>- Bước 3: Vào trang thông tin bản thân: Nhấn phím "Profile".</p>
 	<p>- Bước 4: Cập nhật thông tin bản thân: Nhập các thông tin cần thiết, nhấn phím "Cập nhật" để lưu thông tin.</p>
 	<p>- Bước 5: In các tài liệu cần thiết: Vào "Profile", nhấn "In Báo cáo" để in báo cáo học tập hoặc nhấn "In Bảng điểm" để in bản dịch bảng điểm.</p>
-	<h5>Lưu ý: Các file báo cáo chưa hoàn toàn đầy đủ, mọi người cần bổ sung các thông tin thêm!</h5>
+	<p class="lead">Lưu ý: Các file báo cáo chưa hoàn toàn đầy đủ, mọi người cần bổ sung các thông tin thêm!</p>
 {% endblock %}

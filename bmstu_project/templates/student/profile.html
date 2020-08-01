@@ -6,9 +6,7 @@
 {% endblock %}
 
 {% block body_block %}
-	<hr/>
-	<h6 class="font-weight-normal text-center">{{ selecteduser.username }} Profile</h6>
-	<hr/>
+	<h4 class="mb-4 text-center">{{ selecteduser.username }} Profile</h4>
 
 	<div>
 		{% if selecteduser.username == user.username %}
@@ -135,7 +133,7 @@
 		        </div>
 
 		        <hr/>
-				<h6 class="font-weight-normal text-center">KẾT QUẢ HỌC TẬP</h6>
+				<h6 class="text-center">KẾT QUẢ HỌC TẬP</h6>
 				<hr/>
 
 		        <div class="form-group row">
@@ -393,7 +391,7 @@
 		        </div>
 
 		        <hr/>
-				<h6 class="font-weight-normal text-center">THÔNG TIN NGÂN HÀNG</h6>
+				<h6 class="text-center">THÔNG TIN NGÂN HÀNG</h6>
 				<hr/>
 
 		        <div class="form-group row">
@@ -410,10 +408,10 @@
 
 		        <hr/>
 
-				<div class="text-left">
+				<div class="text-left" style="margin-bottom:100px">
 		            <input class="btn btn-primary btn-sm" type="submit" name="submit" value="Cập Nhật" />
-		            <a class="btn btn-primary btn-sm" href="{% url 'report_document' %}">In Báo cáo</a>
-		            <a class="btn btn-primary btn-sm" href="{% url 'grade_document' %}">In Bảng điểm</a>
+		            <a class="btn btn-success btn-sm" href="{% url 'report_document' %}">In Báo cáo</a>
+		            <a class="btn btn-success btn-sm" href="{% url 'grade_document' %}">In Bảng điểm</a>
 		        </div>
 			</form>
 		{% endif %}
